@@ -1,0 +1,23 @@
+.nav {
+  background-color: #d5d1b9 !important;
+}
+.nav_wrapper {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.nav_right {
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.active {
+  color: #561cd3 !important;
+}
+
+.link {
+  color: #1a36a6;
+  text-decoration: none;
+}
