@@ -1,4 +1,4 @@
-.register_wrapper {
+.auth_wrapper {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
     background-color: #bde161;
     padding: 10px;
@@ -10,4 +10,11 @@
     background-color: #7762d7;
     text-align: center;
     color: #78e368;
+}
+
+.auth_action {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

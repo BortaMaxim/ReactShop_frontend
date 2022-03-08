@@ -2,6 +2,7 @@ import * as ActionTypes from '../types/AuthUserTypes'
 
 let initialState = {
     authResponse: '',
+    emailError: '',
     isAuthLoading: false
 }
 
@@ -18,14 +19,12 @@ export const authReducer = (state = initialState, action) => {
                 isAuthLoading: true
             }
         case ActionTypes.SIGNUP_SUCCESS:
-            debugger
             return {
                 ...state,
                 isAuthLoading: false,
-                authResponse: action.payload
+                authResponse: action.payload,
             }
         case ActionTypes.SIGNUP_ERROR:
-            debugger
             return {
                 ...state,
                 isAuthLoading: false,
@@ -41,7 +40,13 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthLoading: false,
-                authResponse: action.payload
+                authResponse: action.res.errors,
+            }
+        case ActionTypes.EMAIL_IS_NOT_EXIST:
+            return  {
+                ...state,
+                isAuthLoading: false,
+                emailError: action.res,
             }
         case ActionTypes.LOGOUT_SUCCESS:
             return {
@@ -54,13 +59,6 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.payload
-            }
-        case ActionTypes.CODE_ERROR:
-            debugger
-            return {
-                ...state,
-                isAuthLoading: false,
-                authResponse: "There seems to be a problem, please refresh your browser",
             }
         default:
             return state

@@ -20,7 +20,7 @@ export class AuthServices {
     }
 
     logoutUserService = () => {
-        return this.http.getData('logout').then(data => {
+        return this.http.getData('logout', 'user-token').then(data => {
             return data
         }).catch(error => {
             return error

@@ -1,0 +1,16 @@
+.root {
+    margin-top: 150px;
+}
+.profile_wrapper{
+    /*width: 100%;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #cea2ec;
+    padding: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+}
+.profile_card_info {
+    width: 100%;
+}

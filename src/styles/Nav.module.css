@@ -1,23 +1,26 @@
 .nav {
-  background-color: #d5d1b9 !important;
+  background-color: #ac75e8 !important;
 }
 .nav_wrapper {
   display: flex !important;
   justify-content: space-between !important;
+  align-items: center !important;
 }
 
 .nav_right {
-  width: 200px;
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .active {
-  color: #561cd3 !important;
+  color: #e12424 !important;
 }
 
 .link {
+  margin-right: 20px!important;
   color: #1a36a6;
   text-decoration: none;
+  cursor: pointer
 }

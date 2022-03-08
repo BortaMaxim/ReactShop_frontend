@@ -2,25 +2,25 @@ import React from 'react'
 import {Header} from "../Components/Header";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import {Home} from "../Pages/Home";
-import {Login} from "../Pages/Login";
+import LoginContainer from "../Pages/Login/LoginContainer";
 import RegisterContainer from "../Pages/Register/RegisterContainer";
 import {NoMatch} from "../Pages/NoMatch";
 import {GuardRouter} from "./GuardRouter";
 import {PrivateRoute} from "./PrivateRoute";
 
-export const AppRoutes = () => {
+export const AppRoutes = (props) => {
     return (
         <BrowserRouter>
-            <Header/>
+            <Header />
             <Switch>
                 <Route path="/home">
-                    <Home />
+                    <Home/>
                 </Route>
                 <Route path="/user/login">
-                    <Login />
+                    <LoginContainer/>
                 </Route>
                 <Route path="/user/register">
-                    <RegisterContainer />
+                    <RegisterContainer/>
                 </Route>
 
                 <GuardRouter
@@ -30,11 +30,8 @@ export const AppRoutes = () => {
                     component={PrivateRoute}
                 />
                 <Route exact path="*" render={props => (
-                    <Redirect to={{ pathname: '/home' }} />
+                    <Redirect to={{pathname: '/home'}}/>
                 )}/>
-                {/*<Route path="*">*/}
-                {/*    <NoMatch />*/}
-                {/*</Route>*/}
             </Switch>
         </BrowserRouter>
     )

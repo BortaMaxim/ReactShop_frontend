@@ -24,12 +24,6 @@ export const profileReducer = (state = initialState, action) => {
                 isProfileLoading: false,
                 profileResponse: action.payload
             }
-        case ActionTypes.CODE_ERROR:
-            return {
-                ...state,
-                isProfileLoading: false,
-                profileResponse: action.error
-            }
         default:
             return state
     }

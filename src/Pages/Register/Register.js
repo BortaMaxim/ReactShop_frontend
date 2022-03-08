@@ -1,15 +1,16 @@
 import React from 'react'
-import classes from '../styles/Register.module.css'
+import classes from '../../styles/Auth.module.css'
 import {Box, Button, CircularProgress, Container, Typography} from '@material-ui/core'
 import {Field} from "redux-form";
-import {renderTextField} from "../redux-form/renderTextField";
+import {renderTextField} from "../../redux-form/renderTextField";
+import {Link} from "react-router-dom";
 
 const Register = (props) => {
     return (
         <div>
             <Box mt={14}>
                 <Container maxWidth={'sm'}>
-                    <div className={classes.register_wrapper}>
+                    <div className={classes.auth_wrapper}>
                         {
                             props.registerSelector.authResponse.success === true
                                 ? <h2 className={classes.auth_title}>{props.registerSelector.authResponse.message}</h2>
@@ -84,6 +85,14 @@ const Register = (props) => {
                                     }
                                 </Button>
                             </Box>
+                            <div className={classes.auth_action}>
+                                <Link to={'/'}>
+                                    back to Home
+                                </Link>
+                                <Link to={'/user/login'}>
+                                    back to Login
+                                </Link>
+                            </div>
                         </form>
                     </div>
                 </Container>

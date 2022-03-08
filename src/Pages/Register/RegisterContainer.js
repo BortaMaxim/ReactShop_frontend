@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {reduxForm} from "redux-form";
 import validate from "../../redux-form/validateReduxForm";
-import Register from "../Register";
+import Register from "./Register";
 import {useDispatch, useSelector} from "react-redux";
 import {RegisterAction} from "../../redux/actions/AuthAction";
 import {useHistory} from "react-router-dom";
@@ -17,7 +17,7 @@ const RegisterContainer = (props) => {
     const history = useHistory()
     let registerSelector = useSelector(state => ({
             authResponse: state.auth.authResponse,
-            isAuthLoading: state.auth.isAuthLoading
+            isAuthLoading: state.auth.isAuthLoading,
         })
     )
     const dispatch = useDispatch()
@@ -26,11 +26,10 @@ const RegisterContainer = (props) => {
     }
     const onRegister = (e) => {
         e.preventDefault()
-        dispatch(RegisterAction({name, email, password, password_confirmation}))
-
+        dispatch(RegisterAction({name, email, password, password_confirmation}, history))
         setField({...initialState})
-        history.push('/user/login')
     }
+
     return (
         <>
             <Register
