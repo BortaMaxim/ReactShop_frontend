@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import classes from '../styles/Nav.module.css'
 import {NavLink} from "react-router-dom";
 import {AppBar, CssBaseline, Toolbar, Typography} from "@material-ui/core";
@@ -10,11 +10,20 @@ import {useModal} from "../hooks/useModal";
 import {AvatarInfo} from "../Pages/Profile/AvatarInfo";
 import {CustomDrawer} from "./FelpersComponent/CustomDrawer";
 import MenuIcon from '@mui/icons-material/Menu';
+import {useDispatch} from "react-redux";
+import {ViewProfileAction} from "../redux/actions/ProfileAction";
 
 export const Nav = (props) => {
     const {profileSelector, token} = props
     const [modalOpen, setModalOpen, toggleModal] = useModal()
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if(localStorage.getItem('user-token')) {
+            dispatch(ViewProfileAction())
+        }
+    }, [dispatch])
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen)
