@@ -1,19 +1,39 @@
-import React from 'react'
+import React, {useState} from 'react'
 import classes from '../styles/Nav.module.css'
 import {NavLink} from "react-router-dom";
 import {AppBar, CssBaseline, Toolbar, Typography} from "@material-ui/core";
 import {HideOnScroll} from "./FelpersComponent/HideOnScroll";
 import {UserProfileInfo} from "./UserProfileInfo";
+import {Avatar, IconButton} from "@mui/material";
+import {CustomModal} from "./FelpersComponent/CustomModal";
+import {useModal} from "../hooks/useModal";
+import {AvatarInfo} from "../Pages/Profile/AvatarInfo";
+import {CustomDrawer} from "./FelpersComponent/CustomDrawer";
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const Nav = (props) => {
     const {profileSelector, token} = props
+    const [modalOpen, setModalOpen, toggleModal] = useModal()
+    const [drawerOpen, setDrawerOpen] = useState(false)
+
+    const handleDrawerToggle = () => {
+        setDrawerOpen(!drawerOpen)
+    }
     return (
         <>
             <CssBaseline/>
             <HideOnScroll {...props}>
                 <AppBar className={classes.nav}>
                     <Toolbar className={classes.nav_wrapper}>
-                        <div>
+                        <div className={classes.nav_left}>
+                            <IconButton onClick={handleDrawerToggle} color="inherit" >
+                                <MenuIcon />
+                            </IconButton>
+                            <CustomDrawer
+                                handleDrawerToggle={handleDrawerToggle}
+                                drawerOpen={drawerOpen}
+                                categoriesSelector={props.categoriesSelector}
+                            />
                             <NavLink activeClassName={classes.active} className={classes.link} to={'/home'}>
                                 <Typography variant={'h5'}>Home</Typography>
                             </NavLink>
@@ -23,15 +43,25 @@ export const Nav = (props) => {
                                 ? <div className={classes.nav_right}>
                                     {
                                         profileSelector.profileResponse.success === true
-                                            ? <NavLink to={'/user'} activeClassName={classes.active}
-                                                       className={classes.link}>
-                                                <Typography variant={'h5'}>
+                                            ? <div className={classes.nav_profile}>
+                                                <Avatar
+                                                    src={`http://localhost:8000/avatars/${profileSelector.profileResponse.data.avatar}`}
+                                                    onClick={toggleModal}
+                                                />
+                                                <Typography variant={'h5'} className={classes.profile_name}>
                                                     {profileSelector.profileResponse.data.name}
                                                 </Typography>
-                                            </NavLink>
+                                            </div>
                                             : null
                                     }
                                     <UserProfileInfo {...props}/>
+                                    <CustomModal
+                                        title={"Avatar"}
+                                        isActive={modalOpen}
+                                        handleClose={() => setModalOpen(false)}
+                                    >
+                                        <AvatarInfo profileSelector={profileSelector}/>
+                                    </CustomModal>
                                 </div>
                                 : <div className={classes.nav_right}>
                                     <NavLink to={'/user/login'} activeClassName={classes.active} className={classes.link}>

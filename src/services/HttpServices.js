@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export class HttpServices {
     url = "http://localhost:8000/api/auth"
 

@@ -14,6 +14,12 @@
   align-items: center;
 }
 
+.nav_left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .active {
   color: #e12424 !important;
 }
@@ -23,4 +29,17 @@
   color: #1a36a6;
   text-decoration: none;
   cursor: pointer
+}
+
+.profile_name {
+  color: darkred;
+  cursor: pointer;
+}
+
+.nav_profile {
+  width: 120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 10px;
 }

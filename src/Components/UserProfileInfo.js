@@ -1,6 +1,7 @@
 import React from 'react'
-import {Avatar, Menu, MenuItem, Typography} from "@material-ui/core";
+import {Menu, MenuItem, Typography} from "@material-ui/core";
 import classes from "../styles/Nav.module.css";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import {NavLink} from "react-router-dom";
 
 export const UserProfileInfo = (props) => {
@@ -15,7 +16,8 @@ export const UserProfileInfo = (props) => {
 
     return (
         <div>
-            <Avatar
+
+            <AccountCircle
                 style={{cursor: "pointer"}}
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}

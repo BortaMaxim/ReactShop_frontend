@@ -1,4 +1,4 @@
-import * as ActionTypes from '../types/AuthUserTypes'
+import * as AuthUserTypes from '../types/AuthUserTypes'
 
 let initialState = {
     authResponse: '',
@@ -8,53 +8,53 @@ let initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ActionTypes.RESTART_AUTH_RESPONSE:
+        case AuthUserTypes.RESTART_AUTH_RESPONSE:
             return {
                 ...state,
                 authResponse: ''
             }
-        case ActionTypes.LOADING:
+        case AuthUserTypes.LOADING:
             return {
                 ...state,
                 isAuthLoading: true
             }
-        case ActionTypes.SIGNUP_SUCCESS:
+        case AuthUserTypes.SIGNUP_SUCCESS:
             return {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.payload,
             }
-        case ActionTypes.SIGNUP_ERROR:
+        case AuthUserTypes.SIGNUP_ERROR:
             return {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.payload
             }
-        case ActionTypes.LOGIN_SUCCESS:
+        case AuthUserTypes.LOGIN_SUCCESS:
             return {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.payload
             }
-        case ActionTypes.LOGIN_ERROR:
+        case AuthUserTypes.LOGIN_ERROR:
             return {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.res.errors,
             }
-        case ActionTypes.EMAIL_IS_NOT_EXIST:
+        case AuthUserTypes.EMAIL_IS_NOT_EXIST:
             return  {
                 ...state,
                 isAuthLoading: false,
                 emailError: action.res,
             }
-        case ActionTypes.LOGOUT_SUCCESS:
+        case AuthUserTypes.LOGOUT_SUCCESS:
             return {
                 ...state,
                 isAuthLoading: false,
                 authResponse: action.payload
             }
-        case ActionTypes.LOGOUT_ERROR:
+        case AuthUserTypes.LOGOUT_ERROR:
             return {
                 ...state,
                 isAuthLoading: false,

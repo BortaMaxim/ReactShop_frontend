@@ -1,28 +1,68 @@
-import React, {useEffect} from 'react'
-import {Profile} from "./Profile";
-import {useDispatch, useSelector} from "react-redux";
-import {ViewProfileAction} from "../../redux/actions/ProfileAction";
+import React, {Component} from 'react'
+import Profile from "./Profile";
+import {connect} from "react-redux";
+import {UpdateProfileAction, ViewProfileAction} from "../../redux/actions/ProfileAction";
 
-const ProfileContainer = () => {
-    const dispatch = useDispatch()
-    const profileSelector = useSelector((state) => ({
-        profileResponse: state.profile.profileResponse,
-        loginSuccess: state.auth.authResponse,
-        isProfileLoading: state.profile.isProfileLoading,
-    }))
-
-
-    useEffect(() => {
-        dispatch(ViewProfileAction())
-        return () => {
+class ProfileContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: this.props.profileResponse.success === true && this.props.profileResponse.data.name,
+            email: this.props.profileResponse.success === true && this.props.profileResponse.data.email,
+            avatar: '',
+            password: '',
+            password_confirmation: '',
         }
-    }, [dispatch])
+        this.onChangeProfile = this.onChangeProfile.bind(this)
+        this.onUploadChange = this.onUploadChange.bind(this)
+    }
+    componentDidMount() {
+        this.props.ViewProfileAction()
+    }
 
-    return (
-        <div>
-            <Profile profileSelector={profileSelector}/>
-        </div>
-    )
+    onChangeProfile(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onUploadChange(e) {
+        this.setState({
+            avatar: e.target.files[0]
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <Profile
+                    profileSelector={this.props.profileResponse}
+                    errorResponse={this.props.errorResponse}
+                    UpdateProfileAction={this.props.UpdateProfileAction}
+                    isProfileLoading={this.props.isProfileLoading}
+                    isUpdating={this.props.isUpdating}
+                    onChangeProfile={this.onChangeProfile}
+                    onUploadChange={this.onUploadChange}
+                    fields={this.state}
+                />
+            </div>
+        )
+    }
 }
 
-export default ProfileContainer
+const mapStateToProps = (state) => {
+    return {
+        profileResponse: state.profile.profileResponse,
+        errorResponse: state.profile.errorResponse,
+        loginSuccess: state.auth.authResponse,
+        isProfileLoading: state.profile.isProfileLoading,
+        isUpdating: state.profile.isUpdating,
+    }
+}
+
+
+export default connect(mapStateToProps, {
+    ViewProfileAction,
+    UpdateProfileAction
+})(ProfileContainer)
+
