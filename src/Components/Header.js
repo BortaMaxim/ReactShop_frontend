@@ -4,6 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {LogoutAction} from "../redux/actions/AuthAction";
 import {FetchCategories} from "../redux/actions/CategoriesAction";
+import {Fab, Toolbar} from "@mui/material";
+import {ScrollToTop} from "./FelpersComponent/ScrollToTop";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 
 export const Header = (props) => {
     const profileSelector = useSelector((state) => ({
@@ -28,13 +32,20 @@ export const Header = (props) => {
     }, [dispatch])
 
     return (
-        <Nav
-            {...props}
-            logout={logout}
-            token={token}
-            profileSelector={profileSelector}
-            categoriesSelector={categoriesSelector}
-        />
-
+        <>
+            <Nav
+                {...props}
+                logout={logout}
+                token={token}
+                profileSelector={profileSelector}
+                categoriesSelector={categoriesSelector}
+            />
+            <Toolbar id="back-to-top-anchor" />
+            <ScrollToTop {...props}>
+                <Fab color="secondary" size="small" aria-label="scroll back to top">
+                    <KeyboardArrowUpIcon />
+                </Fab>
+            </ScrollToTop>
+        </>
     )
 }

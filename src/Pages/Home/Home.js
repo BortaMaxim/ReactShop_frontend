@@ -2,8 +2,9 @@ import React, {useEffect} from 'react'
 import axios from 'axios'
 import {useSelector} from "react-redux";
 import {HomeItem} from "./HomeItem";
-import {Box, Button, CircularProgress, Container, Typography} from "@mui/material";
+import {Box, CircularProgress, Container} from "@mui/material";
 import {useInfinityScroll} from "../../hooks/useInfinityScroll";
+import {useHistory} from "react-router-dom";
 
 const BASE_URL = 'http://localhost:8000/api'
 
@@ -12,6 +13,7 @@ export const Home = () => {
         isLoadProducts: state.products.isLoadProducts,
         products: state.products.products,
     }))
+    const history = useHistory()
     const {
         items,
         hasNext,
@@ -32,12 +34,18 @@ export const Home = () => {
         }
     }
 
+    const handleProductItem =  (id) => {
+        localStorage.setItem('product-id', id)
+        history.push(`/product-item/${id}`)
+    }
+
     return (
         <>
             <Container maxWidth={"lg"}>
                 <Box mt={14} marginBottom={6}>
                     <HomeItem
                         productsSelector={productsSelector}
+                        handleProductItem={handleProductItem}
                         items={items}
                     />
                     <div>

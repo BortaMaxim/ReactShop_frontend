@@ -2,7 +2,8 @@ import * as ProductsTypes from '../types/ProductsTypes'
 
 const initialState = {
     isLoadProducts: false,
-    products: []
+    products: [],
+    product: ''
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -22,6 +23,19 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 isLoadProducts: false,
                 products: action.payload
+            }
+        case ProductsTypes.GET_ONE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                isLoadProducts: false,
+                product: action.payload.data
+            }
+        case ProductsTypes.GET_ONE_PRODUCT_ERROR:
+            debugger
+            return {
+                ...state,
+                isLoadProducts: false,
+                product: action.error
             }
         default:
             return state

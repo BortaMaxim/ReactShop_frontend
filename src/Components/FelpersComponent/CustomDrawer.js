@@ -24,7 +24,7 @@ export const CustomDrawer = (props) => {
                             : <>
                                 {
                                     categoriesSelector.categories.data.map((el) => (
-                                        <ListItem button key={el.id}>
+                                        <ListItem  key={el.id}>
                                             <ListItemIcon>
                                                 {el.id % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                                             </ListItemIcon>

@@ -5,7 +5,7 @@ import CardMediaModal from "../../Components/FelpersComponent/ReserveModal";
 
 
 export const HomeItem = (props) => {
-    const {items} = props
+    const {items, handleProductItem} = props
     return (
         <>
             <div>
@@ -24,7 +24,9 @@ export const HomeItem = (props) => {
                                                 <strong>{el.price} $</strong>
                                             </CardContent>
                                             <CardActions>
-                                                <Button size="small">Learn More</Button>
+                                                <Button size="small" onClick={() => handleProductItem(el.id)}>
+                                                    More
+                                                </Button>
                                                 <small className={classes.product_id}>{el.id}</small>
                                             </CardActions>
                                         </Card>

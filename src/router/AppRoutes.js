@@ -1,14 +1,14 @@
 import React from 'react'
 import {Header} from "../Components/Header";
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {Home} from "../Pages/Home/Home";
 import LoginContainer from "../Pages/Login/LoginContainer";
 import RegisterContainer from "../Pages/Register/RegisterContainer";
-import {NoMatch} from "../Pages/NoMatch";
 import {GuardRouter} from "./GuardRouter";
 import {PrivateRoute} from "./PrivateRoute";
+import {ProductItem} from "../Pages/Product/ProductItem";
 
-export const AppRoutes = (props) => {
+export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Header />
@@ -21,6 +21,9 @@ export const AppRoutes = (props) => {
                 </Route>
                 <Route path="/user/register">
                     <RegisterContainer/>
+                </Route>
+                <Route path="/product-item/:id">
+                    <ProductItem />
                 </Route>
 
                 <GuardRouter

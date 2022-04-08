@@ -9,3 +9,11 @@ export const FetchProducts = (page) => async (dispatch) => {
         dispatch({type: ProductsTypes.LOAD_PRODUCTS_SUCCESS, payload: res})
     })
 }
+export const FetchOneProductAction = (id) => async (dispatch) => {
+    dispatch({type: ProductsTypes.IS_LOAD_PRODUCTS})
+    await axios.get(`${BASE_URL}/products/${id}/get-one`).then(res => {
+        dispatch({type: ProductsTypes.GET_ONE_PRODUCT_SUCCESS, payload: res.data})
+    }).catch(error => {
+        dispatch({type: ProductsTypes.GET_ONE_PRODUCT_ERROR, error})
+    })
+}
