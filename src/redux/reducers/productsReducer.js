@@ -2,6 +2,8 @@ import * as ProductsTypes from '../types/ProductsTypes'
 
 const initialState = {
     isLoadProducts: false,
+    isFilteringProducts: false,
+    filteredProducts: [],
     products: [],
     product: ''
 }
@@ -31,11 +33,21 @@ export const productsReducer = (state = initialState, action) => {
                 product: action.payload.data
             }
         case ProductsTypes.GET_ONE_PRODUCT_ERROR:
-            debugger
             return {
                 ...state,
                 isLoadProducts: false,
                 product: action.error
+            }
+        case ProductsTypes.IS_FILTERING_PRODUCTS:
+            return {
+                ...state,
+                isFilteringProducts: true
+            }
+        case ProductsTypes.FILTER_PRODUCTS:
+            return {
+                ...state,
+                isFilteringProducts: false,
+                filteredProducts: action.payload
             }
         default:
             return state

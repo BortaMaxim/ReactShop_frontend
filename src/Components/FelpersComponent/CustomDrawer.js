@@ -8,7 +8,7 @@ import {CustomCircularProgress} from "./CustomCircularProgress";
 const drawerWidth = 240;
 
 export const CustomDrawer = (props) => {
-    const {categoriesSelector} = props
+    const {categoriesSelector, categoryGetOne, drawerOpen, handleDrawerToggle} = props
 
     const drawer = (
         <div>
@@ -24,7 +24,7 @@ export const CustomDrawer = (props) => {
                             : <>
                                 {
                                     categoriesSelector.categories.data.map((el) => (
-                                        <ListItem  key={el.id}>
+                                        <ListItem button key={el.id} onClick={() => categoryGetOne(el.id)}>
                                             <ListItemIcon>
                                                 {el.id % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                                             </ListItemIcon>
@@ -49,8 +49,8 @@ export const CustomDrawer = (props) => {
                     display: {xs: 'none', sm: 'block'},
                     '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
-                open={props.drawerOpen}
-                onClose={props.handleDrawerToggle}
+                open={drawerOpen}
+                onClose={handleDrawerToggle}
                 ModalProps={{
                     keepMounted: true,
                 }}

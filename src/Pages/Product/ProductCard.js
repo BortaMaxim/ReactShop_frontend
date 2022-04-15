@@ -32,7 +32,7 @@ export const ProductCard = (props) => {
                                                 <strong>Description: </strong> {productData.product.description}
                                             </Typography>
                                             <Typography variant={'h6'} color={'default'}>
-                                                <strong>Price: </strong> {productData.product.price}
+                                                <strong>Price: </strong> {productData.product.price} <strong>$</strong>
                                             </Typography>
                                         </div>
                                     </div>

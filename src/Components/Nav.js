@@ -14,7 +14,7 @@ import {useDispatch} from "react-redux";
 import {ViewProfileAction} from "../redux/actions/ProfileAction";
 
 export const Nav = (props) => {
-    const {profileSelector, token} = props
+    const {profileSelector, token, categoriesSelector, categoryGetOne} = props
     const [modalOpen, setModalOpen, toggleModal] = useModal()
     const [drawerOpen, setDrawerOpen] = useState(false)
     const dispatch = useDispatch()
@@ -41,7 +41,8 @@ export const Nav = (props) => {
                             <CustomDrawer
                                 handleDrawerToggle={handleDrawerToggle}
                                 drawerOpen={drawerOpen}
-                                categoriesSelector={props.categoriesSelector}
+                                categoriesSelector={categoriesSelector}
+                                categoryGetOne={categoryGetOne}
                             />
                             <NavLink activeClassName={classes.active} className={classes.link} to={'/home'}>
                                 <Typography variant={'h5'}>Home</Typography>

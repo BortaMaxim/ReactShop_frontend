@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {HomeItem} from "./HomeItem";
 import {Box, CircularProgress, Container} from "@mui/material";
 import {useInfinityScroll} from "../../hooks/useInfinityScroll";
 import {useHistory} from "react-router-dom";
+import {Search} from "../../Components/FelpersComponent/Search";
+import {FilterProducts} from "../../redux/actions/ProductsAction";
 
 const BASE_URL = 'http://localhost:8000/api'
 
@@ -14,6 +16,9 @@ export const Home = () => {
         products: state.products.products,
     }))
     const history = useHistory()
+    const dispatch = useDispatch()
+    const [filter, setFilter] = useState('')
+
     const {
         items,
         hasNext,
@@ -34,17 +39,32 @@ export const Home = () => {
         }
     }
 
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value)
+    }
+
+    const handleFilterSubmit = (e) => {
+        e.preventDefault()
+        dispatch(FilterProducts(filter))
+        history.push(`/products/search/q.${filter}`)
+    }
+
     const handleProductItem =  (id) => {
-        localStorage.setItem('product-id', id)
         history.push(`/product-item/${id}`)
     }
 
     return (
         <>
             <Container maxWidth={"lg"}>
-                <Box mt={14} marginBottom={6}>
+                <Box mt={3} width={'100%'}>
+                    <Search
+                        handleFilterChange={handleFilterChange}
+                        handleFilterSubmit={handleFilterSubmit}
+                        filter={filter}
+                    />
+                </Box>
+                <Box mt={4} marginBottom={6}>
                     <HomeItem
-                        productsSelector={productsSelector}
                         handleProductItem={handleProductItem}
                         items={items}
                     />

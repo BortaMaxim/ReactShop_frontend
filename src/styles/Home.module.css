@@ -4,6 +4,13 @@
     align-items: center;
     flex-wrap: wrap;
 }
+.link {
+    text-decoration: none;
+}
+.form_search {
+    display: flex;
+    justify-content: center;
+}
 
 .card {
     width: 260px;

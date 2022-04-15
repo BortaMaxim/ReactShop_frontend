@@ -1,2 +1,3 @@
 export const IS_LOAD_CATEGORIES = 'categories/IS_LOAD_CATEGORIES'
 export const GET_CATEGORIES_SUCCESS = 'categories/GET_CATEGORIES_SUCCESS'
+export const FETCH_CATEGORY_GET_ONE = 'categories/FETCH_CATEGORY_GET_ONE'

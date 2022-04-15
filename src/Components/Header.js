@@ -3,7 +3,7 @@ import {Nav} from "./Nav";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {LogoutAction} from "../redux/actions/AuthAction";
-import {FetchCategories} from "../redux/actions/CategoriesAction";
+import {FetchCategories, FetchCategoryGetOne} from "../redux/actions/CategoriesAction";
 import {Fab, Toolbar} from "@mui/material";
 import {ScrollToTop} from "./FelpersComponent/ScrollToTop";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -17,6 +17,7 @@ export const Header = (props) => {
     const categoriesSelector = useSelector((state) => ({
         isCatLoading: state.categories.isCatLoading,
         categories: state.categories.categories,
+        category: state.categories.category,
     }))
     const dispatch = useDispatch()
     const history = useHistory()
@@ -31,6 +32,11 @@ export const Header = (props) => {
         return () => {}
     }, [dispatch])
 
+    const categoryGetOne = (id) => {
+        history.push(`/category/${id}`)
+        dispatch(FetchCategoryGetOne(id))
+    }
+
     return (
         <>
             <Nav
@@ -39,6 +45,7 @@ export const Header = (props) => {
                 token={token}
                 profileSelector={profileSelector}
                 categoriesSelector={categoriesSelector}
+                categoryGetOne={categoryGetOne}
             />
             <Toolbar id="back-to-top-anchor" />
             <ScrollToTop {...props}>

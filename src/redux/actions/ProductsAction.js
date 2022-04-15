@@ -17,3 +17,10 @@ export const FetchOneProductAction = (id) => async (dispatch) => {
         dispatch({type: ProductsTypes.GET_ONE_PRODUCT_ERROR, error})
     })
 }
+
+export const FilterProducts = (title) => async (dispatch) => {
+    dispatch({type: ProductsTypes.IS_FILTERING_PRODUCTS})
+    await axios.post(`${BASE_URL}/products/filter`, {title}).then(res => {
+        dispatch({type: ProductsTypes.FILTER_PRODUCTS, payload: res.data})
+    })
+}

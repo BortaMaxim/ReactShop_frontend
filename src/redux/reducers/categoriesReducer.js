@@ -3,6 +3,7 @@ import * as CategoriesTypes from '../types/CategoriesTypes'
 
 const initialState = {
     categories: [],
+    category: {},
     isCatLoading: false,
 }
 
@@ -18,6 +19,12 @@ export const categoriesReducer = (state = initialState, action) => {
                 ...state,
                 isCatLoading: false,
                 categories: action.payload
+            }
+        case CategoriesTypes.FETCH_CATEGORY_GET_ONE:
+            return {
+                ...state,
+                isCatLoading: false,
+                category: action.payload
             }
         default:
             return state

@@ -8,7 +8,7 @@ export const PrivateRoute = (props) => {
         <Switch>
             <Route exact path={`${props.match.path}/profile`} component={ProfileContainer}/>
             <Route exact path={props.match.path} render={props => (
-                <Redirect to={{pathname: `${props.match.path}/profile`}}/>
+                <Redirect to={{pathname: `/`}}/>
             )}/>
         </Switch>
     )

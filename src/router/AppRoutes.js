@@ -7,6 +7,9 @@ import RegisterContainer from "../Pages/Register/RegisterContainer";
 import {GuardRouter} from "./GuardRouter";
 import {PrivateRoute} from "./PrivateRoute";
 import {ProductItem} from "../Pages/Product/ProductItem";
+import {Category} from "../Pages/Category/Category";
+import {FilteringProducts} from "../Pages/Product/FilteringProducts";
+import {NoMatch} from "../Pages/NoMatch";
 
 export const AppRoutes = () => {
     return (
@@ -24,6 +27,15 @@ export const AppRoutes = () => {
                 </Route>
                 <Route path="/product-item/:id">
                     <ProductItem />
+                </Route>
+                <Route path="/category/:id">
+                    <Category />
+                </Route>
+                <Route path="/products/search/q.:slug">
+                    <FilteringProducts />
+                </Route>
+                <Route path={'/no-match'}>
+                    <NoMatch />
                 </Route>
 
                 <GuardRouter

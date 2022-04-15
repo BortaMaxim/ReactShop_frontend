@@ -24,10 +24,10 @@ export const useInfinityScroll = (props) => {
         })
     }
 
-    const loadNext = () => {
+    const loadNext = async () => {
         pageToLoad.current = Number(pageToLoad.current) + 1
         history.replace(dispatch(FetchProducts(pageToLoad.current)))
-        loadItems(pageToLoad.current, 'append')
+        await loadItems(pageToLoad.current, 'append')
     }
 
     useEffect(() => {

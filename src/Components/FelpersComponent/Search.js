@@ -1,15 +1,24 @@
 import React from 'react'
-import {TextField} from "@mui/material";
+import classes from '../../styles/Home.module.css'
+import {Button, TextField, Typography} from "@mui/material";
 
 
-export const Search = () => {
+export const Search = (props) => {
+    const {handleFilterChange, handleFilterSubmit, filter} = props
     return (
         <div>
-            <TextField
-                fullWidth={true}
-                label={'search'}
-                id={'search'}
-            />
+            <form className={classes.form_search} onSubmit={handleFilterSubmit}>
+                <TextField
+                    fullWidth={true}
+                    label={'search...'}
+                    id={'search'}
+                    value={filter}
+                    onChange={handleFilterChange}
+                />
+                <Button color={"secondary"} variant={'contained'} type={"submit"}>
+                    <Typography>Search</Typography>
+                </Button>
+            </form>
         </div>
     )
 }
