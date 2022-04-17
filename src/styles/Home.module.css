@@ -22,7 +22,7 @@
 .product_card {
     position: relative;
     background-color: #a68ae1 !important;
-    padding: 30px;
+    padding: 20px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0, .5);
 }
 
@@ -36,7 +36,17 @@
 }
 
 .product_card_right {
-    width: 50%;
+    width: 40%;
+    min-width: 300px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.product_card_left {
+    width: 60%;
+    min-width: 300px;
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -45,6 +55,8 @@
 }
 
 .product_card_wrapper {
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

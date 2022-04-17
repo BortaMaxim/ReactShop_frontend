@@ -19,14 +19,6 @@ export const FilteringProducts = () => {
         dispatch(FilterProducts(slug))
     }, [dispatch])
 
-    useEffect(() => {
-        filteredProducts.map(product => {
-            if (product.title === slug) {
-                return  history.push('/no-match')
-            }
-        })
-    }, [filteredProducts])
-
     return (
         <div>
             <Container maxWidth={"lg"}>
