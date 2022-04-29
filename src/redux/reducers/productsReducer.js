@@ -24,7 +24,7 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoadProducts: false,
-                products: action.payload
+                products: action.payload.data
             }
         case ProductsTypes.GET_ONE_PRODUCT_SUCCESS:
             return {

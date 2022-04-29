@@ -12,6 +12,7 @@ import {FilteringProducts} from "../Pages/Product/FilteringProducts";
 import {NoMatch} from "../Pages/NoMatch";
 
 export const AppRoutes = () => {
+
     return (
         <BrowserRouter>
             <Header />
@@ -37,7 +38,6 @@ export const AppRoutes = () => {
                 <Route path={'/no-match'}>
                     <NoMatch />
                 </Route>
-
                 <GuardRouter
                     path={'/user'}
                     token={'user-token'}

@@ -5,9 +5,13 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {TotalProducts} from './TotalProducts'
 import {FilterProducts} from "../../redux/actions/ProductsAction";
+import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
 
 export const FilteringProducts = () => {
-    const filteredProducts = useSelector(state => state.products.filteredProducts)
+    const filteredSelectorProducts = useSelector(state => ({
+        filteredProducts: state.products.filteredProducts,
+        isFilteringProducts: state.products.isFilteringProducts,
+    }))
     const history = useHistory()
     const {slug} = useParams()
     const dispatch = useDispatch()
@@ -27,12 +31,20 @@ export const FilteringProducts = () => {
                         <Typography variant={'h4'} color={'primary'}>Back</Typography>
                     </Link>
                     {
-                        filteredProducts.length !== 0
-                            ? <TotalProducts
-                                items={filteredProducts}
-                                handleProductItem={handleProductItem}
-                            />
-                            : null
+                        filteredSelectorProducts.isFilteringProducts === true
+                            ? <CustomCircularProgress/>
+                            : <>
+                                {
+                                    filteredSelectorProducts.filteredProducts.length !== 0
+                                        ? <TotalProducts
+                                            items={filteredSelectorProducts.filteredProducts}
+                                            handleProductItem={handleProductItem}
+                                        />
+                                        : <Typography variant={'h4'} color={'secondary'}>
+                                            No Products ...
+                                        </Typography>
+                                }
+                            </>
                     }
                 </Box>
             </Container>

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import classes from '../styles/Nav.module.css'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {NavLink} from "react-router-dom";
 import {AppBar, CssBaseline, Toolbar, Typography} from "@material-ui/core";
 import {HideOnScroll} from "./FelpersComponent/HideOnScroll";
 import {UserProfileInfo} from "./UserProfileInfo";
-import {Avatar, IconButton} from "@mui/material";
+import {Avatar, Button, IconButton} from "@mui/material";
 import {CustomModal} from "./FelpersComponent/CustomModal";
 import {useModal} from "../hooks/useModal";
 import {AvatarInfo} from "../Pages/Profile/AvatarInfo";
@@ -14,7 +15,7 @@ import {useDispatch} from "react-redux";
 import {ViewProfileAction} from "../redux/actions/ProfileAction";
 
 export const Nav = (props) => {
-    const {profileSelector, token, categoriesSelector, categoryGetOne} = props
+    const {profileSelector, token, categoriesSelector, categoryGetOne, cart} = props
     const [modalOpen, setModalOpen, toggleModal] = useModal()
     const [drawerOpen, setDrawerOpen] = useState(false)
     const dispatch = useDispatch()
@@ -54,6 +55,12 @@ export const Nav = (props) => {
                                     {
                                         profileSelector.profileResponse.success === true
                                             ? <div className={classes.nav_profile}>
+                                                <NavLink to={'/user/cart'} style={{textDecoration: "none"}}>
+                                                    <Button variant={"contained"} color={'secondary'}>
+                                                        <ShoppingCartIcon style={{color: '#ffffff'}}/>
+                                                        {cart ? cart : ''}
+                                                    </Button>
+                                                </NavLink>
                                                 <Avatar
                                                     src={`http://localhost:8000/avatars/${profileSelector.profileResponse.data.avatar}`}
                                                     onClick={toggleModal}

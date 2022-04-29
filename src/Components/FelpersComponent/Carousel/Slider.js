@@ -22,5 +22,7 @@ export const Slider = () => {
         showFullscreenButton={false}
         showPlayButton={false}
         showIndex={true}
+        slideDuration={200}
+        autoPlay={false}
     />
 }

@@ -1,13 +1,14 @@
 import React, {createContext} from 'react'
 import classes from '../../styles/Home.module.css'
 import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
-import {Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {Slider} from "../../Components/FelpersComponent/Carousel/Slider";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export const ProductGallery = createContext()
 
 export const ProductCard = (props) => {
-    const {productData} = props
+    const {productData, addToCart, cartSelector} = props
 
     return (
         <div>
@@ -40,6 +41,11 @@ export const ProductCard = (props) => {
                                                     <Typography variant={'h6'} color={'default'}>
                                                         <strong>Price: </strong> {productData.product.price} <strong>$</strong>
                                                     </Typography>
+                                                    <Button variant={'contained'} color={'secondary'} onClick={() => addToCart(productData.product)}>
+                                                        Buy
+                                                        &nbsp;
+                                                        <AddShoppingCartIcon />
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </div>

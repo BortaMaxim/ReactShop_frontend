@@ -19,6 +19,7 @@ export const Header = (props) => {
         categories: state.categories.categories,
         category: state.categories.category,
     }))
+    const cartSelector = useSelector(state => state.cart.numberCart)
     const dispatch = useDispatch()
     const history = useHistory()
     const logout = () => {
@@ -46,6 +47,7 @@ export const Header = (props) => {
                 profileSelector={profileSelector}
                 categoriesSelector={categoriesSelector}
                 categoryGetOne={categoryGetOne}
+                cart={cartSelector}
             />
             <Toolbar id="back-to-top-anchor" />
             <ScrollToTop {...props}>

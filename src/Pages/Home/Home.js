@@ -6,7 +6,7 @@ import {Box, CircularProgress, Container} from "@mui/material";
 import {useInfinityScroll} from "../../hooks/useInfinityScroll";
 import {useHistory} from "react-router-dom";
 import {Search} from "../../Components/FelpersComponent/Search";
-import {FilterProducts} from "../../redux/actions/ProductsAction";
+import {FetchProducts, FilterProducts} from "../../redux/actions/ProductsAction";
 
 const BASE_URL = 'http://localhost:8000/api'
 
@@ -24,6 +24,10 @@ export const Home = () => {
         hasNext,
         loadNext,
     } = useInfinityScroll({getItems: ({page}) => axios.get(`${BASE_URL}/products/limit/8?page=${page}`)})
+
+    useEffect(() => {
+        dispatch(FetchProducts(1))
+    }, [dispatch])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)

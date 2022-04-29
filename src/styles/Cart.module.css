@@ -1,0 +1,19 @@
+.cart_img {
+    width: 100px;
+    height: 100px;
+}
+.cart_table {
+    background-color: #b468d2;
+    width: 100%;
+    min-width: 300px;
+}
+.cart_header {
+    background-color: #b2aeae;
+    color: white;
+}
+.table_quantity {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
