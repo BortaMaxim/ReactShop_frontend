@@ -1,5 +1,6 @@
 import React from 'react'
 import {TotalProducts} from "../Product/TotalProducts";
+import {Typography} from "@mui/material";
 
 
 export const HomeItem = (props) => {

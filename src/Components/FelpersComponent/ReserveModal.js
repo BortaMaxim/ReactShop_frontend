@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {CardMedia} from "@mui/material";
+import {switchProductsUrlImg} from '../../helpers/switchProductsImgUrl'
 
 const style = {
     position: 'absolute',
@@ -26,7 +26,7 @@ export default function BasicModal(props) {
             <CardMedia
                 component="img"
                 height="150"
-                image={el.product_img}
+                image={switchProductsUrlImg(el.product_img)}
                 alt={el.title}
                 onClick={handleOpen}
             />
@@ -37,7 +37,7 @@ export default function BasicModal(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <img style={{width: '100%', height: 400}} src={el.product_img} alt={el.title}/>
+                    <img style={{width: '100%', height: 400}} src={switchProductsUrlImg(el.product_img)} alt={el.title}/>
                 </Box>
             </Modal>
         </div>

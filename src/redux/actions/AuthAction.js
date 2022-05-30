@@ -25,6 +25,7 @@ export const LoginAction = (credentials, history) => async (dispatch) => {
     await authServices.loginUserService(credentials).then(res => {
         if (res.hasOwnProperty('success') && res.success === true) {
             localStorage.setItem('user-token', res.token)
+            localStorage.setItem('user-role', res.data.roles)
             dispatch({type: ActionTypes.LOGIN_SUCCESS, payload: res})
             history.push('/user')
         } else if (res.hasOwnProperty('errors') && res.errors !== {}) {
@@ -40,6 +41,7 @@ export const LogoutAction = () => async (dispatch) => {
     await authServices.logoutUserService().then(res => {
         if (res.hasOwnProperty('success') && res.success === true) {
             localStorage.removeItem('user-token')
+            localStorage.removeItem('user-role')
             dispatch({type: ActionTypes.LOGOUT_SUCCESS, payload: res})
         } else if (res.hasOwnProperty('success') && res.success === false) {
             dispatch({type: ActionTypes.LOGOUT_ERROR, payload: res})

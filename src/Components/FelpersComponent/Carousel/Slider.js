@@ -3,13 +3,14 @@ import '../../../styles/Slider/slider.css'
 import "react-image-gallery/styles/css/image-gallery.css";
 import {ProductGallery} from "../../../Pages/Product/ProductCard";
 import ImageGallery from 'react-image-gallery';
+import {switchProductsUrlImg} from "../../../helpers/switchProductsImgUrl";
 
 export const Slider = () => {
     const {product_gallery, product_img} = useContext(ProductGallery)
     const [imageData, setImageData] = useState([])
     const data = product_gallery.map(img => ({original: img.images, thumbnail: img.images}))
     const objImg = {
-        original: product_img, thumbnail: product_img
+        original: switchProductsUrlImg(product_img), thumbnail: switchProductsUrlImg(product_img)
     }
     useEffect(() => {
         setImageData([objImg, ...data])

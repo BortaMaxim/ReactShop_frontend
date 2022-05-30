@@ -25,6 +25,7 @@ export const cartReducer = (state = initialState, action) => {
                         state.carts[key].quantity++
                         check = true
                     }
+                    return check
                 })
                 if (!check) {
                     let _cart = {

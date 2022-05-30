@@ -5,14 +5,16 @@ import {Link} from "react-router-dom";
 import {CircularProgress, TextField} from "@mui/material";
 
 export const EditProfile = (props) => {
-    const {onChangeProfile, onUploadChange, onSubmit, fields, isUpdating, errorResponse} = props
+    const {handleChange, handleUpload, onSubmit, fields, profileSelector} = props
     return (
         <div>
             <Box mt={2}>
                 <Container maxWidth={'sm'}>
                     {
-                        errorResponse !== ''
-                            ? <Typography color={"secondary"}>{errorResponse.response.data.message}</Typography>
+                        profileSelector.errorResponse !== ''
+                            ? <Typography color={"secondary"}>
+                                {profileSelector.errorResponse.response.data.message}
+                        </Typography>
                             : null
                     }
                     <div className={classes.auth_wrapper}>
@@ -22,8 +24,8 @@ export const EditProfile = (props) => {
                                     name="name"
                                     fullWidth={true}
                                     label="name"
-                                    onChange={onChangeProfile}
-                                    value={fields.name}
+                                    onChange={handleChange}
+                                    value={fields.name || ''}
                                 />
                             </Box>
                             <Box mt={2}>
@@ -31,15 +33,15 @@ export const EditProfile = (props) => {
                                     name="email"
                                     fullWidth={true}
                                     label="email"
-                                    onChange={onChangeProfile}
-                                    value={fields.email}
+                                    onChange={handleChange}
+                                    value={fields.email || ''}
                                 />
                             </Box>
                             <Box mt={2}>
                                 <input
                                     type="file"
                                     name="avatar"
-                                    onChange={onUploadChange}
+                                    onChange={handleUpload}
                                 />
                             </Box>
                             <Box mt={2}>
@@ -48,8 +50,8 @@ export const EditProfile = (props) => {
                                     name="password"
                                     fullWidth={true}
                                     label="password"
-                                    onChange={onChangeProfile}
-                                    value={fields.password}
+                                    onChange={handleChange}
+                                    value={fields.password || ''}
                                 />
                             </Box>
                             <Box mt={2}>
@@ -58,14 +60,14 @@ export const EditProfile = (props) => {
                                     name="password_confirmation"
                                     fullWidth={true}
                                     label="confirm_password"
-                                    onChange={onChangeProfile}
-                                    value={fields.password_confirmation}
+                                    onChange={handleChange}
+                                    value={fields.password_confirmation || ''}
                                 />
                             </Box>
                             <Box mt={2}>
                                 <Button type={"submit"} fullWidth={true} color={"primary"} variant={"contained"}>
                                     {
-                                        isUpdating === true
+                                        profileSelector.isUpdating === true
                                             ? <CircularProgress/>
                                             : <Typography>Update</Typography>
                                     }

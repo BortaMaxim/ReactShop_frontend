@@ -10,6 +10,11 @@ import {ProductItem} from "../Pages/Product/ProductItem";
 import {Category} from "../Pages/Category/Category";
 import {FilteringProducts} from "../Pages/Product/FilteringProducts";
 import {NoMatch} from "../Pages/NoMatch";
+import {UserManagementEdit} from "../Pages/Admin/UserManagement/UserManagementEdit";
+import {UserManagementCreate} from "../Pages/Admin/UserManagement/UserManagementCreate";
+import {CategoryManagementEdit} from "../Pages/Admin/CategoryManagement/CategoryManagementEdit";
+import {ProductAdminCreateForm} from "../Pages/Admin/ProductsManagement/ProductAdminCreateForm";
+import {ProductAdminEdit} from "../Pages/Admin/ProductsManagement/ProductAdminEdit";
 
 export const AppRoutes = () => {
 
@@ -34,6 +39,21 @@ export const AppRoutes = () => {
                 </Route>
                 <Route path="/products/search/q.:slug">
                     <FilteringProducts />
+                </Route>
+                <Route path="/user/admin/user/edit/:id">
+                    <UserManagementEdit />
+                </Route>
+                <Route path={'/user/admin/user/create'}>
+                    <UserManagementCreate />
+                </Route>
+                <Route path="/user/admin/category/edit/:id">
+                    <CategoryManagementEdit />
+                </Route>
+                <Route path="/user/admin/product/create">
+                    <ProductAdminCreateForm />
+                </Route>
+                <Route path="/user/admin/product/edit/:id">
+                    <ProductAdminEdit />
                 </Route>
                 <Route path={'/no-match'}>
                     <NoMatch />

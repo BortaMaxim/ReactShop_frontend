@@ -7,6 +7,8 @@ import {useInfinityScroll} from "../../hooks/useInfinityScroll";
 import {useHistory} from "react-router-dom";
 import {Search} from "../../Components/FelpersComponent/Search";
 import {FetchProducts, FilterProducts} from "../../redux/actions/ProductsAction";
+import {SelectFilter} from "../../Components/FelpersComponent/SelectFilter";
+import {SortByAlphabet, SortByPriceAction} from "../../redux/actions/SortAction";
 
 const BASE_URL = 'http://localhost:8000/api'
 
@@ -15,9 +17,11 @@ export const Home = () => {
         isLoadProducts: state.products.isLoadProducts,
         products: state.products.products,
     }))
+
     const history = useHistory()
     const dispatch = useDispatch()
     const [filter, setFilter] = useState('')
+    const [sortTypes, setSortTypes] = useState('')
 
     const {
         items,
@@ -57,6 +61,17 @@ export const Home = () => {
         history.push(`/product-item/${id}`)
     }
 
+    const handleSortChange = (e) => {
+        let value = e.target.value
+        setSortTypes(value)
+        let direction = value.endsWith('asc') ? 'asc': 'desc'
+        if (value.startsWith('price')) {
+            dispatch(SortByPriceAction({direction}, items))
+        }else {
+            dispatch(SortByAlphabet({direction}, items))
+        }
+    }
+
     return (
         <>
             <Container maxWidth={"lg"}>
@@ -66,6 +81,9 @@ export const Home = () => {
                         handleFilterSubmit={handleFilterSubmit}
                         filter={filter}
                     />
+                </Box>
+                <Box mt={2}>
+                    <SelectFilter handleSortChange={handleSortChange} sortTypes={sortTypes}/>
                 </Box>
                 <Box mt={4} marginBottom={6}>
                     <HomeItem

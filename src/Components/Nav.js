@@ -44,6 +44,7 @@ export const Nav = (props) => {
                                 drawerOpen={drawerOpen}
                                 categoriesSelector={categoriesSelector}
                                 categoryGetOne={categoryGetOne}
+                                profileSelector={profileSelector}
                             />
                             <NavLink activeClassName={classes.active} className={classes.link} to={'/home'}>
                                 <Typography variant={'h5'}>Home</Typography>

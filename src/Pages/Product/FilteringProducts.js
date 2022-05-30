@@ -30,6 +30,9 @@ export const FilteringProducts = () => {
                     <Link to={'/'} className={classes.link}>
                         <Typography variant={'h4'} color={'primary'}>Back</Typography>
                     </Link>
+                    <Typography variant={'h6'} color={'secondary'}>
+                        Found <strong>{filteredSelectorProducts.filteredProducts.length}</strong> products !
+                    </Typography>
                     {
                         filteredSelectorProducts.isFilteringProducts === true
                             ? <CustomCircularProgress/>

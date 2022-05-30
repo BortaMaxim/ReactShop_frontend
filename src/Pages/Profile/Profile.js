@@ -7,19 +7,15 @@ import {EditProfile} from "./EditProfile";
 import {useModal} from "../../hooks/useModal";
 import {CustomModal} from "../../Components/FelpersComponent/CustomModal";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {UpdateProfileAction} from "../../redux/actions/ProfileAction";
 
 const Profile = (props) => {
-    const {
-        profileSelector,
-        errorResponse,
-        onChangeProfile,
-        onUploadChange,
-        fields,
-        isProfileLoading,
-        isUpdating
-    } = props
+    const {fields, handleChange, handleUpload, profileSelector} = props
     const [editModalOpen, setEditModalOpen, editToggle] = useModal()
     const history = useHistory()
+    const dispatch = useDispatch()
+
     const onUpdateProfile = (e) => {
         let formData = new FormData()
         formData.append('name', fields.name)
@@ -28,18 +24,18 @@ const Profile = (props) => {
         formData.append('password', fields.password)
         formData.append('password_confirmation', fields.password_confirmation)
         e.preventDefault()
-        props.UpdateProfileAction(formData, history)
+        dispatch(UpdateProfileAction(formData, history))
     }
     return (
         <div>
             {
-                isProfileLoading === true
+                profileSelector.isProfileLoading === true
                     ? <CustomCircularProgress/>
                     : <Container maxWidth={"sm"} className={classes.root}>
                         {
-                            profileSelector.success === true
+                            profileSelector.profileResponse.success === true
                             && <div className={classes.profile_wrapper}>
-                                <ProfileCardInfo profile={profileSelector} toggle={editToggle}/>
+                                <ProfileCardInfo profile={profileSelector.profileResponse} toggle={editToggle}/>
                             </div>
                         }
                         <CustomModal
@@ -48,13 +44,11 @@ const Profile = (props) => {
                             isActive={editModalOpen}
                         >
                             <EditProfile
-                                errorResponse={errorResponse}
-                                isUpdating={isUpdating}
-                                profile={profileSelector}
-                                onChangeProfile={onChangeProfile}
+                                profileSelector={profileSelector}
+                                handleChange={handleChange}
                                 onSubmit={onUpdateProfile}
                                 fields={fields}
-                                onUploadChange={onUploadChange}
+                                handleUpload={handleUpload}
                             />
                         </CustomModal>
                     </Container>

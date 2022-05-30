@@ -4,8 +4,8 @@ import * as ProfileUserTypes from '../types/ProfileUserTypes'
 let initialState = {
     isProfileLoading: false,
     isUpdating: false,
-    profileResponse: '',
-    errorResponse: ''
+    profileResponse: {},
+    errorResponse: {}
 }
 
 export const profileReducer = (state = initialState, action) => {

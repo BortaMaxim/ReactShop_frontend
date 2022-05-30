@@ -1,4 +1,5 @@
 import * as CategoriesTypes from '../types/CategoriesTypes'
+import * as AdminCategoriesTypes from '../types/AdminCategoriesTypes'
 
 
 const initialState = {
@@ -25,6 +26,13 @@ export const categoriesReducer = (state = initialState, action) => {
                 ...state,
                 isCatLoading: false,
                 category: action.payload
+            }
+        case AdminCategoriesTypes.IS_HIDE_CATEGORY:
+            return {
+                ...state,
+                categories: state.categories.filter(category => {
+                    return category.id !== action.payload
+                })
             }
         default:
             return state

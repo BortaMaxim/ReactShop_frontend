@@ -24,7 +24,7 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoadProducts: false,
-                products: action.payload.data
+                products: action.payload
             }
         case ProductsTypes.GET_ONE_PRODUCT_SUCCESS:
             return {
@@ -49,6 +49,7 @@ export const productsReducer = (state = initialState, action) => {
                 isFilteringProducts: false,
                 filteredProducts: action.payload
             }
+
         default:
             return state
     }
