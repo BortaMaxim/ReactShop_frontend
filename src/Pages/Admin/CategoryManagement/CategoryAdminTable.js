@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import {
     Box,
     Pagination,
@@ -78,4 +79,10 @@ export const CategoryAdminTable = (props) => {
             </Box>
         </TableContainer>
     )
+}
+CategoryAdminTable.propTypes = {
+    data: PropTypes.array.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    deleteCategorySelector: PropTypes.object.isRequired,
 }

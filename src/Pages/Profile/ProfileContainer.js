@@ -2,16 +2,17 @@ import React, {useEffect, useState} from 'react'
 import Profile from "./Profile";
 import {useDispatch, useSelector} from "react-redux";
 import {ViewProfileAction} from "../../redux/actions/ProfileAction";
+import {profilePropsValidation} from "../../propTypes/profileProps/profilePropsValidation";
 
 const ProfileContainer = () => {
     const dispatch = useDispatch()
-    const profileSelector = useSelector(state => ({
+    const profileSelector = profilePropsValidation(useSelector(state => ({
         profileResponse: state.profile.profileResponse,
         errorResponse: state.profile.errorResponse,
         loginSuccess: state.auth.authResponse,
         isProfileLoading: state.profile.isProfileLoading,
         isUpdating: state.profile.isUpdating,
-    }))
+    })))
 
     const [fields, setFields] = useState({...profileSelector.profileResponse.data})
 

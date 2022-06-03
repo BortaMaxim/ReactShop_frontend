@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, Button, CircularProgress, TextField, Typography} from "@mui/material";
 import classes from "../../../styles/Auth.module.css";
 
 
 export const CategoryManagementUpdateForm = (props) => {
     const {fields, handleChange, handleSubmit, updateCategorySelector} = props
+
     return (
         <form onSubmit={handleSubmit}>
             <Box mt={4} className={classes.auth_wrapper}>
@@ -55,4 +57,11 @@ export const CategoryManagementUpdateForm = (props) => {
             </Box>
         </form>
     )
+}
+
+CategoryManagementUpdateForm.propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    updateCategorySelector: PropTypes.object.isRequired,
 }

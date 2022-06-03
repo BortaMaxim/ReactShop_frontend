@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, CircularProgress, TextField, Typography} from "@mui/material";
 import {AdminSelect} from "./AdminSelect";
 import {Button} from "@material-ui/core";
@@ -103,4 +104,19 @@ export const UserManagementCreateForm = (props) => {
             </form>
         </>
     )
+}
+
+UserManagementCreateForm.propTypes = {
+    fields: PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+        avatar: PropTypes.string,
+        password: PropTypes.string,
+        password_confirmation: PropTypes.string,
+        roles: PropTypes.string
+    }),
+    onHandleChange: PropTypes.func.isRequired,
+    onHandleUpload: PropTypes.func.isRequired,
+    onCreateUser: PropTypes.func.isRequired,
+    createUserSelector: PropTypes.object.isRequired,
 }

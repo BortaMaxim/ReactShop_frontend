@@ -10,18 +10,19 @@ import {
 import {CustomCircularProgress} from "../../../Components/FelpersComponent/CustomCircularProgress";
 import AdminTable from "./AdminTable";
 import {useHistory} from "react-router-dom";
+import {usersPropsValidation} from "../../../propTypes/adminPropTypes/usersPropsValidation";
 
 export const UserManagement = () => {
-    const adminUsersSelector = useSelector(state => ({
+    const adminUsersSelector = usersPropsValidation(useSelector(state => ({
         isUsersFetching: state.adminUsers.isUsersFetching,
         allUsers: state.adminUsers.allUsers,
         isShow: state.adminUsers.isShow,
-    }))
+    })))
 
-    const deleteUsersSelector = useSelector(state => ({
+    const deleteUsersSelector = usersPropsValidation(useSelector(state => ({
         deleteSuccess: state.adminDeleteUsers.deleteSuccess,
         deleteError: state.adminDeleteUsers.deleteError,
-    }))
+    })))
 
     const history = useHistory()
     const dispatch = useDispatch()

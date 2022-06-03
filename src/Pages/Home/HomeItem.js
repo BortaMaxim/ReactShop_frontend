@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {TotalProducts} from "../Product/TotalProducts";
-import {Typography} from "@mui/material";
 
 
 export const HomeItem = (props) => {
@@ -24,4 +24,9 @@ export const HomeItem = (props) => {
             </div>
         </>
     )
+}
+
+HomeItem.propTypes = {
+    items: PropTypes.array,
+    handleProductItem: PropTypes.func,
 }

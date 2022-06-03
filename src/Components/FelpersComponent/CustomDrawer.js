@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from '../../styles/Admin.module.css'
+import PropTypes from 'prop-types'
 import {Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography} from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -75,4 +76,12 @@ export const CustomDrawer = ({categoriesSelector, categoryGetOne, drawerOpen, ha
             </Drawer>
         </div>
     )
+}
+
+CustomDrawer.propTypes = {
+    categoriesSelector: PropTypes.object.isRequired,
+    categoryGetOne: PropTypes.func.isRequired,
+    drawerOpen: PropTypes.bool.isRequired,
+    handleDrawerToggle: PropTypes.func.isRequired,
+    profileSelector: PropTypes.object.isRequired,
 }

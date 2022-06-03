@@ -9,14 +9,15 @@ import {Search} from "../../Components/FelpersComponent/Search";
 import {FetchProducts, FilterProducts} from "../../redux/actions/ProductsAction";
 import {SelectFilter} from "../../Components/FelpersComponent/SelectFilter";
 import {SortByAlphabet, SortByPriceAction} from "../../redux/actions/SortAction";
+import {homePropsValidation} from "../../propTypes/homeProps/homePropsValidation";
 
 const BASE_URL = 'http://localhost:8000/api'
 
 export const Home = () => {
-    const productsSelector = useSelector((state) => ({
+    const productsSelector = homePropsValidation(useSelector((state) => ({
         isLoadProducts: state.products.isLoadProducts,
         products: state.products.products,
-    }))
+    })))
 
     const history = useHistory()
     const dispatch = useDispatch()

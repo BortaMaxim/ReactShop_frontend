@@ -9,17 +9,18 @@ import {
     AdminProductsFetchProductsAction
 } from "../../../redux/actions/AdminProductsManagement";
 import {IsHideNotificationsAction} from "../../../redux/actions/AdminCategoryManagementAction";
+import {productsPropsValidator} from "../../../propTypes/adminPropTypes/productsPropsValidator";
 
 export const ProductManagement = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const adminProductsSelector = useSelector(state => ({
+    const adminProductsSelector = productsPropsValidator(useSelector(state => ({
         products: state.adminProducts.products,
         loading: state.adminProducts.loading,
         deleteSuccess: state.adminDeleteProduct.deleteSuccess,
         isHide: state.adminDeleteProduct.isHide,
-    }))
+    })))
 
     useEffect(() => {
         dispatch(AdminProductsFetchProductsAction())

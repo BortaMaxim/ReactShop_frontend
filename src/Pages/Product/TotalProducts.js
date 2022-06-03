@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classes from "../../styles/Home.module.css";
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
 import CardMediaModal from "../../Components/FelpersComponent/ReserveModal";
@@ -31,4 +32,9 @@ export const TotalProducts = (props) => {
             </div>
         </div>
     )
+}
+
+TotalProducts.propTypes = {
+    items: PropTypes.array,
+    handleProductItem: PropTypes.func.isRequired
 }

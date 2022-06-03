@@ -3,12 +3,13 @@ import {Container, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AddQuantityCartAction, EmptyCartAction, SubQuantity} from "../../redux/actions/CartActions";
 import {CartTable} from "./CartTable";
+import {cartPropsValidation} from "../../propTypes/cartProps/cartPropsValidation";
 
 
 export const Cart = () => {
-    const cartSelector = useSelector(state => ({
+    const cartSelector = cartPropsValidation(useSelector(state => ({
         carts: state.cart.carts,
-    }))
+    })))
     const dispatch = useDispatch()
 
     let ListCart = [];

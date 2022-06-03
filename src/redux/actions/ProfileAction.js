@@ -31,6 +31,6 @@ export const UpdateProfileAction = (credentials, history) => async (dispatch) =>
         dispatch({type: ProfileUserTypes.UPDATED_USER_PROFILE_SUCCESS, payload: res})
         history.push('/user/profile')
     }).catch(error => {
-        dispatch({type: ProfileUserTypes.UPDATED_USER_PROFILE_ERROR, payload: error})
+        dispatch({type: ProfileUserTypes.UPDATED_USER_PROFILE_ERROR, payload: error.response})
     })
 }

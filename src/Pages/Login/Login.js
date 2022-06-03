@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, Button, CircularProgress, Container, Typography} from "@material-ui/core";
 import classes from "../../styles/Auth.module.css";
 import {Field} from "redux-form";
@@ -6,45 +7,52 @@ import {renderTextField} from "../../redux-form/renderTextField";
 import {Link} from "react-router-dom";
 
 const Login = (props) => {
+    const {fields, loginSelector, handleChange, onSubmit} = props
     return (
         <div>
             <Box mt={14}>
                 <Container maxWidth={'sm'}>
                     <div className={classes.auth_wrapper}>
                         {
-                            props.loginSelector.authResponse.success === true
-                                ? <h2 className={classes.auth_title}>{props.loginSelector.authResponse.message}</h2>
-                                : null
-                        }
-                        {
-                            props.loginSelector.emailError.success === false
-                                ? <Typography color={"secondary"}>{props.loginSelector.emailError.message}</Typography>
-                                : null
+                            loginSelector.isHide === false
+                            ? <div>
+                                    {
+                                        loginSelector.authResponse.success === true
+                                            ? <h2 className={classes.auth_title}>{loginSelector.authResponse.message}</h2>
+                                            : null
+                                    }
+                                    {
+                                        loginSelector.emailError.success === false
+                                            ? <Typography color={"secondary"}>{loginSelector.emailError.message}</Typography>
+                                            : null
+                                    }
+                                </div>
+                            : null
                         }
                         <Typography align={"center"} variant={'h4'} color={"primary"}>
                             Login
                         </Typography>
-                        <form onSubmit={props.onSubmit}>
+                        <form onSubmit={onSubmit}>
                             <Box mt={2}>
                                 {
-                                    props.loginSelector.authResponse !== {}
+                                    loginSelector.authResponse !== {}
                                         ? <Typography
-                                            color={"secondary"}>{props.loginSelector.authResponse.email}</Typography>
+                                            color={"secondary"}>{loginSelector.authResponse.email}</Typography>
                                         : null
                                 }
                                 <Field
                                     name="email"
                                     component={renderTextField}
                                     label="email"
-                                    onChange={props.onChange}
-                                    value={props.fields.email}
+                                    onChange={handleChange}
+                                    value={fields.email}
                                 />
                             </Box>
                             <Box mt={2}>
                                 {
-                                    props.loginSelector.authResponse !== {}
+                                    loginSelector.authResponse !== {}
                                         ? <Typography
-                                            color={"secondary"}>{props.loginSelector.authResponse.password}</Typography>
+                                            color={"secondary"}>{loginSelector.authResponse.password}</Typography>
                                         : null
                                 }
                                 <Field
@@ -52,14 +60,14 @@ const Login = (props) => {
                                     name="password"
                                     component={renderTextField}
                                     label="password"
-                                    onChange={props.onChange}
-                                    value={props.fields.password}
+                                    onChange={handleChange}
+                                    value={fields.password}
                                 />
                             </Box>
                             <Box mt={2}>
                                 <Button type={"submit"} fullWidth={true} color={"primary"} variant={"contained"}>
                                     {
-                                        props.loginSelector.isAuthLoading === true
+                                        loginSelector.isAuthLoading === true
                                             ? <CircularProgress color={"secondary"}/>
                                             : <Typography>Login</Typography>
                                     }
@@ -79,6 +87,13 @@ const Login = (props) => {
             </Box>
         </div>
     )
+}
+
+Login.propTypes = {
+    fields: PropTypes.objectOf(PropTypes.string),
+    loginSelector: PropTypes.object,
+    handleChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
 }
 
 export default Login

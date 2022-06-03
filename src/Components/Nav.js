@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import classes from '../styles/Nav.module.css'
+import PropTypes from 'prop-types'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {NavLink} from "react-router-dom";
 import {AppBar, CssBaseline, Toolbar, Typography} from "@material-ui/core";
@@ -15,7 +16,7 @@ import {useDispatch} from "react-redux";
 import {ViewProfileAction} from "../redux/actions/ProfileAction";
 
 export const Nav = (props) => {
-    const {profileSelector, token, categoriesSelector, categoryGetOne, cart} = props
+    const {profileSelector, token, categoriesSelector, categoryGetOne, cartSelector} = props
     const [modalOpen, setModalOpen, toggleModal] = useModal()
     const [drawerOpen, setDrawerOpen] = useState(false)
     const dispatch = useDispatch()
@@ -59,7 +60,7 @@ export const Nav = (props) => {
                                                 <NavLink to={'/user/cart'} style={{textDecoration: "none"}}>
                                                     <Button variant={"contained"} color={'secondary'}>
                                                         <ShoppingCartIcon style={{color: '#ffffff'}}/>
-                                                        {cart ? cart : ''}
+                                                        {cartSelector ? cartSelector : ''}
                                                     </Button>
                                                 </NavLink>
                                                 <Avatar
@@ -96,4 +97,12 @@ export const Nav = (props) => {
             </HideOnScroll>
         </>
     )
+}
+
+Nav.propTypes = {
+    profileSelector: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
+    categoriesSelector: PropTypes.object.isRequired,
+    categoryGetOne: PropTypes.func.isRequired,
+    cartSelector: PropTypes.number.isRequired,
 }

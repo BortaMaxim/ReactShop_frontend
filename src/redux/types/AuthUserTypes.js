@@ -1,3 +1,4 @@
+export const IS_HIDE_NOTIFICATION = 'admin/IS_HIDE_NOTIFICATION'
 export const RESTART_AUTH_RESPONSE = 'auth/RESTART_AUTH_RESPONSE';
 export const LOADING = 'auth/LOADING';
 export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';

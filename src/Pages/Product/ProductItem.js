@@ -6,20 +6,24 @@ import {ProductCard} from "./ProductCard";
 import {FetchOneProductAction} from "../../redux/actions/ProductsAction";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {AddToCartAction} from "../../redux/actions/CartActions";
+import {productPropsValidation} from "../../propTypes/productProps/productPropsValidation";
+import {cartPropsValidation} from "../../propTypes/cartProps/cartPropsValidation";
 
 export const ProductItem = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const {id} = useParams()
-    const productData = useSelector(state => {
+
+    const productData = productPropsValidation(useSelector(state => {
         return {
             product: state.products.product,
             isLoadProducts: state.products.isLoadProducts,
         }
-    })
-    const cartSelector = useSelector(state => ({
-        cart: state.cart
     }))
+
+    const cartSelector = cartPropsValidation(useSelector(state => ({
+        cart: state.cart
+    })))
 
     useEffect(() => {
         dispatch(FetchOneProductAction(id))

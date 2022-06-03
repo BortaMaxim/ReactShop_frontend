@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, Button, Container, Typography} from "@material-ui/core";
 import classes from "../../styles/Auth.module.css";
 import {Link} from "react-router-dom";
@@ -6,14 +7,15 @@ import {CircularProgress, TextField} from "@mui/material";
 
 export const EditProfile = (props) => {
     const {handleChange, handleUpload, onSubmit, fields, profileSelector} = props
+
     return (
         <div>
             <Box mt={2}>
                 <Container maxWidth={'sm'}>
                     {
-                        profileSelector.errorResponse !== ''
+                        profileSelector.errorResponse.status === 422
                             ? <Typography color={"secondary"}>
-                                {profileSelector.errorResponse.response.data.message}
+                                {profileSelector.errorResponse.data.message}
                         </Typography>
                             : null
                     }
@@ -84,4 +86,19 @@ export const EditProfile = (props) => {
             </Box>
         </div>
     )
+}
+
+EditProfile.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    handleUpload: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    fields: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        email: PropTypes.string,
+        avatar: PropTypes.string,
+        password: PropTypes.string,
+        password_confirmation: PropTypes.string,
+    }),
+    profileSelector: PropTypes.object
 }

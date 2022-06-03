@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, InputLabel, MenuItem, Select} from "@mui/material";
 
 export const AdminSelect = (props) => {
@@ -24,4 +25,16 @@ export const AdminSelect = (props) => {
             </Select>
         </Box>
     )
+}
+
+AdminSelect.propTypes = {
+    fields: PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+        avatar: PropTypes.string,
+        password: PropTypes.string,
+        password_confirmation: PropTypes.string,
+        roles: PropTypes.string
+    }),
+    onHandleChange: PropTypes.func.isRequired,
 }

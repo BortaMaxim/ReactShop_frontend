@@ -3,7 +3,7 @@ import {Button} from "@mui/material";
 import {useHistory} from "react-router-dom";
 
 
-export const ProductAdminCreate = (props) => {
+export const ProductAdminCreate = () => {
     const history = useHistory()
     return (
         <div>

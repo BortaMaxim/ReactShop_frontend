@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import {
     Box,
     Pagination,
@@ -98,4 +99,11 @@ export const ProductsAdminTable = (props) => {
             </Box>
         </TableContainer>
     )
+}
+
+ProductsAdminTable.propTypes = {
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    data: PropTypes.array.isRequired,
+    adminProductsSelector: PropTypes.object.isRequired,
 }

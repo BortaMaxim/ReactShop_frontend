@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from '../../styles/Admin.module.css'
+import PropTypes from 'prop-types'
 import {List, ListItem, ListItemText, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 
@@ -49,4 +50,9 @@ export const SiteManagement = (props) => {
             <hr/>
         </>
     )
+}
+
+SiteManagement.propTypes = {
+    profileSelector: PropTypes.object,
+    roles: PropTypes.string,
 }

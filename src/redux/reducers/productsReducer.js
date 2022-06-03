@@ -4,8 +4,8 @@ const initialState = {
     isLoadProducts: false,
     isFilteringProducts: false,
     filteredProducts: [],
-    products: [],
-    product: ''
+    products: {},
+    product: {}
 }
 
 export const productsReducer = (state = initialState, action) => {

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import {Box, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import classes from "../../../styles/Cart.module.css";
 import {RedButton, YellowButton} from "../../../Components/FelpersComponent/Buttons/CustomButton";
@@ -68,6 +69,12 @@ const AdminTable = (props) => {
             </Box>
         </TableContainer>
     )
+}
+
+AdminTable.propTypes = {
+    data: PropTypes.array.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
 }
 
 export default AdminTable

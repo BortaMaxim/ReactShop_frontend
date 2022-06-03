@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from '../../styles/Profile.module.css'
+import PropTypes from 'prop-types'
 import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
 import {Container} from "@mui/material";
 import {ProfileCardInfo} from "./ProfileCardInfo";
@@ -55,6 +56,13 @@ const Profile = (props) => {
             }
         </div>
     )
+}
+
+Profile.propTypes = {
+    fields: PropTypes.object,
+    profileSelector: PropTypes.object,
+    handleChange: PropTypes.func.isRequired,
+    handleUpload: PropTypes.func.isRequired,
 }
 
 export default Profile

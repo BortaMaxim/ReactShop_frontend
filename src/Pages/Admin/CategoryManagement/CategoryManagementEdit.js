@@ -8,6 +8,7 @@ import {
     ViewCategoryAction
 } from "../../../redux/actions/AdminCategoryManagementAction";
 import {CategoryManagementUpdateForm} from "./CategoryManagementUpdateForm";
+import {adminCategoriesPropTypesValidation} from "../../../propTypes/adminPropTypes/categoriesPropsValidation";
 
 
 export const CategoryManagementEdit = () => {
@@ -15,17 +16,17 @@ export const CategoryManagementEdit = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
 
-    const viewCategorySelector = useSelector(state => ({
+    const viewCategorySelector = adminCategoriesPropTypesValidation(useSelector(state => ({
         download: state.adminViewCategory.download,
         category: state.adminViewCategory.category,
-    }))
+    })))
 
-    const updateCategorySelector = useSelector(state => ({
+    const updateCategorySelector = adminCategoriesPropTypesValidation(useSelector(state => ({
         isUpdating: state.adminUpdateCategory.isUpdating,
         updatedResponse: state.adminUpdateCategory.updatedResponse,
         updatedError: state.adminUpdateCategory.updatedError,
         isHide: state.adminUpdateCategory.isHide,
-    }))
+    })))
 
     const [fields, setFields] = useState({...viewCategorySelector.category})
 

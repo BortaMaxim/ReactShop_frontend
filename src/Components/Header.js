@@ -7,19 +7,22 @@ import {FetchCategories, FetchCategoryGetOne} from "../redux/actions/CategoriesA
 import {Fab, Toolbar} from "@mui/material";
 import {ScrollToTop} from "./FelpersComponent/ScrollToTop";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import {profilePropsValidation} from "../propTypes/profileProps/profilePropsValidation";
+import {categoriesPropsValidation} from "../propTypes/categoriesProps/categoriesPropsValidation";
 
 
 export const Header = (props) => {
-    const profileSelector = useSelector((state) => ({
+    const profileSelector = profilePropsValidation(useSelector((state) => ({
         profileResponse: state.profile.profileResponse,
         loginSuccess: state.auth.authResponse
-    }))
-    const categoriesSelector = useSelector((state) => ({
+    })))
+    const categoriesSelector = categoriesPropsValidation(useSelector((state) => ({
         isCatLoading: state.categories.isCatLoading,
         categories: state.categories.categories,
         category: state.categories.category,
-    }))
+    })))
     const cartSelector = useSelector(state => state.cart.numberCart)
+
     const dispatch = useDispatch()
     const history = useHistory()
     const logout = () => {
@@ -47,7 +50,7 @@ export const Header = (props) => {
                 profileSelector={profileSelector}
                 categoriesSelector={categoriesSelector}
                 categoryGetOne={categoryGetOne}
-                cart={cartSelector}
+                cartSelector={cartSelector}
             />
             <Toolbar id="back-to-top-anchor" />
             <ScrollToTop {...props}>

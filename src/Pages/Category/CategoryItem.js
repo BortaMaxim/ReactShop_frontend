@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classes from '../../styles/Home.module.css'
 import CardMediaModal from "../../Components/FelpersComponent/ReserveModal";
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
@@ -37,4 +38,9 @@ export const CategoryItem = (props) => {
             }
         </div>
     )
+}
+
+CategoryItem.propTypes = {
+    category: PropTypes.object,
+    handleProductItemInfo: PropTypes.func.isRequired
 }

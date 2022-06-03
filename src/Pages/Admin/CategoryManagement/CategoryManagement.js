@@ -14,25 +14,27 @@ import {
     HideCategoryAction,
     IsHideNotificationsAction
 } from "../../../redux/actions/AdminCategoryManagementAction";
+import {adminCategoriesPropTypesValidation} from "../../../propTypes/adminPropTypes/categoriesPropsValidation";
+import {categoriesPropsValidation} from "../../../propTypes/categoriesProps/categoriesPropsValidation";
 
 export const CategoryManagement = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const categorySelector = useSelector((state) => ({
+    const categorySelector = categoriesPropsValidation(useSelector((state) => ({
         isCatLoading: state.categories.isCatLoading,
         categories: state.categories.categories,
-    }))
+    })))
 
-    const createCategorySelector = useSelector(state => ({
+    const createCategorySelector = adminCategoriesPropTypesValidation(useSelector(state => ({
         isCreating: state.adminCreateCategory.isCreating,
         createdResponse: state.adminCreateCategory.createdResponse,
         isHide: state.adminCreateCategory.isHide,
-    }))
-    const deleteCategorySelector = useSelector(state => ({
+    })))
+    const deleteCategorySelector = adminCategoriesPropTypesValidation(useSelector(state => ({
         deleteSuccess: state.adminDeleteCategory.deleteSuccess,
         isShow: state.adminDeleteCategory.isShow,
-    }))
+    })))
 
     const {fields, handleChange, clear} = useForm({
         category_name: ''
@@ -40,7 +42,7 @@ export const CategoryManagement = () => {
 
     useEffect(() => {
         dispatch(FetchCategories())
-    }, [])
+    }, [dispatch])
 
     const handleEdit = (id) => {
         history.push(`/user/admin/category/edit/${id}`)

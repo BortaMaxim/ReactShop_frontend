@@ -5,14 +5,17 @@ import {FetchCategoryGetOne} from "../../redux/actions/CategoriesAction";
 import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
 import {CategoryItem} from './CategoryItem'
 import {useHistory, useParams} from "react-router-dom";
+import {categoriesPropsValidation} from "../../propTypes/categoriesProps/categoriesPropsValidation";
 
 
 export const Category = () => {
-    const categorySelector = useSelector((state) => ({
+    const categorySelector = categoriesPropsValidation(useSelector((state) => ({
         isCatLoading: state.categories.isCatLoading,
         category: state.categories.category,
-    }))
+    })))
+
     const {isCatLoading, category} = categorySelector
+
     const dispatch = useDispatch()
     const history = useHistory()
     const {id} = useParams()

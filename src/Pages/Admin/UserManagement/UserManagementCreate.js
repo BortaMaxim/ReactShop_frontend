@@ -5,17 +5,17 @@ import classes from "../../../styles/Auth.module.css";
 import {UserManagementCreateForm} from "./UserManagementCreateForm";
 import {useDispatch, useSelector} from "react-redux";
 import {CreateUserAction, IsHideAction} from "../../../redux/actions/AdminUsersManagementAction";
-
+import {usersPropsValidation} from '../../../propTypes/adminPropTypes/usersPropsValidation'
 
 export const UserManagementCreate = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const createUserSelector = useSelector(state => ({
+    const createUserSelector = usersPropsValidation(useSelector(state => ({
         isCreating: state.adminCreateUsers.isCreating,
         createdResponse: state.adminCreateUsers.createdResponse,
         isHide: state.adminCreateUsers.isHide,
-    }))
+    })))
 
     const [fields, setFields] = useState({
         name: '',

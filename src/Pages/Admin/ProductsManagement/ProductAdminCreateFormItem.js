@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from "../../../styles/Auth.module.css";
+import PropTypes from 'prop-types'
 import {Box, Button, CircularProgress, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 
 
@@ -120,4 +121,12 @@ export const ProductAdminCreateFormItem = (props) => {
             </form>
         </Box>
     )
+}
+
+ProductAdminCreateFormItem.propTypes = {
+    selector: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleUpload: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
 }

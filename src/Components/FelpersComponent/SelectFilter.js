@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 export const SelectFilter = (props) => {
@@ -30,4 +31,9 @@ export const SelectFilter = (props) => {
             </Select>
         </FormControl>
     )
+}
+
+SelectFilter.propTypes = {
+    handleSortChange: PropTypes.func.isRequired,
+    sortTypes: PropTypes.string,
 }

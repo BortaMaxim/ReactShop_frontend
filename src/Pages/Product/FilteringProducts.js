@@ -6,12 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {TotalProducts} from './TotalProducts'
 import {FilterProducts} from "../../redux/actions/ProductsAction";
 import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
+import {productPropsValidation} from "../../propTypes/productProps/productPropsValidation";
 
 export const FilteringProducts = () => {
-    const filteredSelectorProducts = useSelector(state => ({
+    const filteredSelectorProducts = productPropsValidation(useSelector(state => ({
         filteredProducts: state.products.filteredProducts,
         isFilteringProducts: state.products.isFilteringProducts,
-    }))
+    })))
     const history = useHistory()
     const {slug} = useParams()
     const dispatch = useDispatch()

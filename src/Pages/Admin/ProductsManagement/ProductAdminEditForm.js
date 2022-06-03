@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import classes from "../../../styles/Auth.module.css";
 import {Box, Button, CircularProgress, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 
@@ -120,5 +121,12 @@ const ProductAdminEditForm = (props) => {
         </Box>
     );
 };
+ProductAdminEditForm.propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleUpload: PropTypes.func.isRequired,
+    selector: PropTypes.object.isRequired,
+}
 
 export default ProductAdminEditForm;

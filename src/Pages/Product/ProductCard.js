@@ -1,14 +1,15 @@
 import React, {createContext} from 'react'
 import classes from '../../styles/Home.module.css'
+import PropTypes from 'prop-types'
 import {CustomCircularProgress} from "../../Components/FelpersComponent/CustomCircularProgress";
 import {Button, Typography} from "@mui/material";
 import {Slider} from "../../Components/FelpersComponent/Carousel/Slider";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-export const ProductGallery = createContext()
+export const ProductGallery = createContext(null)
 
 export const ProductCard = (props) => {
-    const {productData, addToCart, cartSelector} = props
+    const {productData, addToCart} = props
 
     return (
         <div>
@@ -57,4 +58,9 @@ export const ProductCard = (props) => {
             }
         </div>
     )
+}
+
+ProductCard.propTypes = {
+    productData: PropTypes.object,
+    addToCart: PropTypes.func.isRequired
 }

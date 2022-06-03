@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import classes from "../../styles/Cart.module.css";
 import {GreenButton, RedButton} from "../../Components/FelpersComponent/Buttons/CustomButton";
@@ -58,4 +59,13 @@ export const CartTable = (props) => {
             </TableContainer>
         </div>
     )
+}
+
+CartTable.propTypes = {
+    TotalCart: PropTypes.number.isRequired,
+    ListCart: PropTypes.array,
+    addQuantity: PropTypes.func.isRequired,
+    deleteCart: PropTypes.func.isRequired,
+    subQuantity: PropTypes.func.isRequired,
+    totalPrice: PropTypes.func.isRequired,
 }

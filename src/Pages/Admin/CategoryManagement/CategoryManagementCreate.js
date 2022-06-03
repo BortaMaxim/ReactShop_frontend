@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, Button, CircularProgress, TextField, Typography} from "@mui/material";
 
 
@@ -55,4 +56,13 @@ export const CategoryManagementCreate = (props) => {
             </form>
         </>
     )
+}
+
+CategoryManagementCreate.propTypes = {
+    fields: PropTypes.shape({
+        category_name: PropTypes.string.isRequired
+    }),
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    createCategorySelector: PropTypes.object.isRequired,
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {CardMedia} from "@mui/material";
@@ -42,4 +43,8 @@ export default function BasicModal(props) {
             </Modal>
         </div>
     );
+}
+
+BasicModal.propTypes = {
+    el: PropTypes.object
 }
