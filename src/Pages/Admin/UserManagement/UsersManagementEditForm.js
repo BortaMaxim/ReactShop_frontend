@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Box, CircularProgress, TextField, Typography} from "@mui/material";
 import {Button} from "@material-ui/core";
 import classes from "../../../styles/Auth.module.css";
@@ -86,4 +87,19 @@ export const UsersManagementEditForm = (props) => {
             </div>
         </form>
     )
+}
+
+UsersManagementEditForm.propTypes = {
+    fields: PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+        avatar: PropTypes.string,
+        password: PropTypes.string,
+        password_confirmation: PropTypes.string,
+        roles: PropTypes.string,
+    }),
+    onHandleUpload: PropTypes.func.isRequired,
+    onHandleChange: PropTypes.func.isRequired,
+    onSubmitForm: PropTypes.func.isRequired,
+    updateUsersSelector: PropTypes.object,
 }
