@@ -17,7 +17,6 @@ import {ProductAdminCreateForm} from "../Pages/Admin/ProductsManagement/ProductA
 import {ProductAdminEdit} from "../Pages/Admin/ProductsManagement/ProductAdminEdit";
 
 export const AppRoutes = () => {
-
     return (
         <BrowserRouter>
             <Header />

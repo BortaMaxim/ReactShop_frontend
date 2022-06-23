@@ -6,17 +6,18 @@ import {Box, Container, Typography} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
 import {CustomCircularProgress} from "../../../Components/FelpersComponent/CustomCircularProgress";
 import {UsersManagementEditForm} from "./UsersManagementEditForm";
+import {usersPropsValidation} from '../../../propTypes/adminPropTypes/usersPropsValidation'
 
 export const UserManagementEdit = () => {
-    const editUsersSelector = useSelector(state => ({
+    const editUsersSelector = usersPropsValidation(useSelector(state => ({
         isEditFetching: state.adminEditUsers.isEditFetching,
         editResponse: state.adminEditUsers.editResponse,
-    }))
-    const updateUsersSelector = useSelector(state => ({
+    })))
+    const updateUsersSelector = usersPropsValidation(useSelector(state => ({
         updatedResponse: state.adminUpdateUsers.updatedResponse,
         errorResponse: state.adminUpdateUsers.errorResponse,
         isUpdating: state.adminUpdateUsers.isUpdating,
-    }))
+    })))
 
     const [fields, setFields] = useState({...editUsersSelector.editResponse})
     const dispatch = useDispatch()

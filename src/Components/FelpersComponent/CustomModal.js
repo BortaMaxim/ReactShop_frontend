@@ -8,6 +8,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 600,
+    height: 400,
+    overflow: 'scroll',
     minWidth: 200,
     backgroundColor: 'background.paper',
     border: 'none !important',

@@ -16,6 +16,7 @@ export const useForm = (initialState = {} , props) => {
             [e.target.name]: e.target.files[0]
         })
     }
+
     const clear = () => {
         setFields(initialState)
     }

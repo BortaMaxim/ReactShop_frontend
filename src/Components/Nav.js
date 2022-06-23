@@ -22,7 +22,7 @@ export const Nav = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(localStorage.getItem('user-token')) {
+        if(token) {
             dispatch(ViewProfileAction())
         }
     }, [dispatch])
@@ -30,6 +30,7 @@ export const Nav = (props) => {
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen)
     }
+
     return (
         <>
             <CssBaseline/>
@@ -101,7 +102,7 @@ export const Nav = (props) => {
 
 Nav.propTypes = {
     profileSelector: PropTypes.object.isRequired,
-    token: PropTypes.string.isRequired,
+    token: PropTypes.string,
     categoriesSelector: PropTypes.object.isRequired,
     categoryGetOne: PropTypes.func.isRequired,
     cartSelector: PropTypes.number.isRequired,

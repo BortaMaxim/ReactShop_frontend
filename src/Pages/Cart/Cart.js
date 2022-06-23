@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AddQuantityCartAction, EmptyCartAction, SubQuantity} from "../../redux/actions/CartActions";
 import {CartTable} from "./CartTable";
 import {cartPropsValidation} from "../../propTypes/cartProps/cartPropsValidation";
+import {useModal} from "../../hooks/useModal";
 
 
 export const Cart = () => {
@@ -12,13 +13,14 @@ export const Cart = () => {
     })))
     const dispatch = useDispatch()
 
-    let ListCart = [];
+    let ListCart = []
     let TotalCart = 0;
 
     Object.keys(cartSelector.carts).forEach(function (item) {
         TotalCart += cartSelector.carts[item].quantity * cartSelector.carts[item].price
         ListCart.push(cartSelector.carts[item])
     })
+    const [modalOpen, setModalOpen, toggle] = useModal()
 
     const addQuantity = (payload) => {
         dispatch(AddQuantityCartAction(payload))
@@ -40,6 +42,9 @@ export const Cart = () => {
                     cartSelector.carts.length === 0
                     ? <Typography variant={'h4'} color={'secondary'}>Empty cart....</Typography>
                     : <CartTable
+                            modalOpen={modalOpen}
+                            toggle={toggle}
+                            setModalOpen={setModalOpen}
                             TotalCart={TotalCart}
                             ListCart={ListCart}
                             addQuantity={addQuantity}
