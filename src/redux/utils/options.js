@@ -1,22 +1,29 @@
 export let BASE_URL = 'http://localhost:8000/api/auth'
-const token = localStorage.getItem('user-token')
+export const URL = 'http://localhost:8000/api'
 
-export const postWithUploadOptions = {
-    headers: {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
-        'Authorization': `Bearer `+token
+export const postWithUploadOptions = (token) => {
+    return {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json',
+            'Authorization': `Bearer `+token
+        }
     }
 }
-export const postOptions = {
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer `+token
+export const postOptions = (token) => {
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer `+token
+        }
     }
 }
-export const getOptions = {
-    headers: {
-        'Authorization': 'Bearer '+ token
+
+export const getOptions = (token) => {
+    return {
+        headers: {
+            'Authorization': 'Bearer '+ token
+        }
     }
 }

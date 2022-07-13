@@ -9,6 +9,7 @@ import {ProductAdminCreateFormItem} from "./ProductAdminCreateFormItem";
 
 
 export const ProductAdminCreateForm = () => {
+    const token = localStorage.getItem('user-token')
     const categoriesSelector = useSelector(state => ({
         isCatLoading: state.categories.isCatLoading,
         categories: state.categories.categories,
@@ -36,7 +37,7 @@ export const ProductAdminCreateForm = () => {
         formData.append('price', fields.price)
         formData.append('product_img', fields.product_img)
         formData.append('category_id', fields.category_id)
-        dispatch(AdminCreateProductAction(formData, history))
+        dispatch(AdminCreateProductAction(formData, history, token))
         clear()
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())

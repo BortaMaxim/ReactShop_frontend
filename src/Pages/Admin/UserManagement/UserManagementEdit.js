@@ -21,6 +21,7 @@ export const UserManagementEdit = () => {
 
     const [fields, setFields] = useState({...editUsersSelector.editResponse})
     const dispatch = useDispatch()
+    const token = localStorage.getItem('user-token')
     const {id} = useParams()
 
     useEffect(() => {
@@ -55,7 +56,7 @@ export const UserManagementEdit = () => {
         formData.append('password_confirmation', fields.password_confirmation)
         formData.append('roles', fields.roles)
         e.preventDefault()
-        dispatch(UpdateUserAction(formData, id))
+        dispatch(UpdateUserAction(formData, id, token))
     }
 
     return (

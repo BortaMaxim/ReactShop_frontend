@@ -40,8 +40,6 @@ export const LogoutAction = () => async (dispatch) => {
     dispatch({type: ActionTypes.RESTART_AUTH_RESPONSE})
     await authServices.logoutUserService().then(res => {
         if (res.hasOwnProperty('success') && res.success === true) {
-            localStorage.removeItem('user-token')
-            localStorage.removeItem('user-role')
             dispatch({type: ActionTypes.LOGOUT_SUCCESS, payload: res})
         } else if (res.hasOwnProperty('success') && res.success === false) {
             dispatch({type: ActionTypes.LOGOUT_ERROR, payload: res})

@@ -2,14 +2,11 @@ import axios from 'axios'
 import * as CheckoutTypes from '../types/CheckoutTypes'
 import {BASE_URL, postOptions} from '../utils/options'
 
-export const BillingAddressAction = (formData, setClientSecret) => async (dispatch) => {
-    await axios.post(`${BASE_URL}/stripe`, formData, postOptions).then(res => {
+export const BillingAddressAction = (formData, setClientSecret, token) => async (dispatch) => {
+    await axios.post(`${BASE_URL}/stripe`, formData, postOptions(token)).then(res => {
         if (res.data.hasOwnProperty('success') && res.data.success === true) {
-            dispatch({type: CheckoutTypes.GET_CLIENT_SECRET_SUCCESS})
             setClientSecret(res.data.client_secret)
         }
-    }).catch(error => {
-        dispatch({type: CheckoutTypes.GET_CLIENT_SECRET_ERROR})
     })
 }
 
@@ -30,7 +27,6 @@ export const ConfirmPaymentAction = (fields, elements, clientSecret, stripe, pro
             phone: fields.phone,
         }
     }).then(({error, paymentMethod}) => {
-        console.log(paymentMethod)
         if (paymentMethod !== undefined) {
             stripe.confirmCardPayment(clientSecret, {
                 payment_method: paymentMethod.id

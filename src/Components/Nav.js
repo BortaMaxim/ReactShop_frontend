@@ -25,7 +25,7 @@ export const Nav = (props) => {
         if(token) {
             dispatch(ViewProfileAction())
         }
-    }, [dispatch])
+    }, [dispatch, token])
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen)

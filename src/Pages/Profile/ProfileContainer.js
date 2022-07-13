@@ -6,6 +6,7 @@ import {profilePropsValidation} from "../../propTypes/profileProps/profilePropsV
 
 const ProfileContainer = () => {
     const dispatch = useDispatch()
+    const token = localStorage.getItem('user-token')
     const profileSelector = profilePropsValidation(useSelector(state => ({
         profileResponse: state.profile.profileResponse,
         errorResponse: state.profile.errorResponse,
@@ -21,8 +22,10 @@ const ProfileContainer = () => {
     }, [profileSelector.profileResponse.data])
 
     useEffect(() => {
-        dispatch(ViewProfileAction())
-    }, [dispatch])
+        if (token) {
+            dispatch(ViewProfileAction())
+        }
+    }, [dispatch, token])
 
     const handleChange = (e) => {
         setFields({
@@ -45,6 +48,7 @@ const ProfileContainer = () => {
                 handleChange={handleChange}
                 handleUpload={handleUpload}
                 fields={fields}
+                token={token}
             />
         </div>
     )

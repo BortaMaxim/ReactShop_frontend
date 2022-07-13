@@ -8,6 +8,7 @@ import {IsHideNotificationsAction} from "../../../redux/actions/AdminCategoryMan
 
 
 export const ProductAdminEdit = () => {
+    const token = localStorage.getItem('user-token')
     const dispatch = useDispatch()
     const history = useHistory()
     const {id} = useParams()
@@ -26,7 +27,7 @@ export const ProductAdminEdit = () => {
     }, [updateProductSelector.product])
 
     useEffect(() => {
-        dispatch(AdminFetchOneProductAction(id))
+        dispatch(AdminFetchOneProductAction(id, token))
     }, [dispatch])
 
     const handleChange = (e) => {
@@ -51,7 +52,7 @@ export const ProductAdminEdit = () => {
         formData.append('price', fields.price)
         formData.append('product_img', fields.product_img)
         formData.append('category_id', fields.category_id)
-        dispatch(AdminUpdateProductAction(formData, id, history))
+        dispatch(AdminUpdateProductAction(formData, id, history, token))
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())
         }, 3000)

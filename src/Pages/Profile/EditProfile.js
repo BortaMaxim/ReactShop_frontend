@@ -96,7 +96,7 @@ EditProfile.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
         email: PropTypes.string,
-        avatar: PropTypes.string,
+        avatar: PropTypes.any,
         password: PropTypes.string,
         password_confirmation: PropTypes.string,
     }),

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box, Container, Typography} from "@mui/material";
 import classes from '../../styles/Home.module.css'
 import {useDispatch, useSelector} from "react-redux";
@@ -8,11 +8,16 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {AddToCartAction} from "../../redux/actions/CartActions";
 import {productPropsValidation} from "../../propTypes/productProps/productPropsValidation";
 import {cartPropsValidation} from "../../propTypes/cartProps/cartPropsValidation";
+import {GetDislikesAction, GetLikesAction, SetDislikeAction, SetLikeAction} from "../../redux/actions/LikesAction";
+import {likesPropsValidation} from "../../propTypes/likesPropTypes/likesPropsValidation";
 
 export const ProductItem = () => {
     const dispatch = useDispatch()
+    const token = localStorage.getItem('user-token')
     const history = useHistory()
     const {id} = useParams()
+    const [hide, setHide] = useState(null)
+    const [wasLiked, setWasLiked] = useState(false)
 
     const productData = productPropsValidation(useSelector(state => {
         return {
@@ -21,12 +26,29 @@ export const ProductItem = () => {
         }
     }))
 
+    const likesSelector = likesPropsValidation(useSelector(state => ({
+        isLike: state.likesDislikes.isLike,
+        download: state.likesDislikes.download,
+        isDislike: state.likesDislikes.isDislike,
+        likeResponse: state.likesDislikes.likeResponse,
+        dislikeResponse: state.likesDislikes.dislikeResponse,
+    })))
+    console.log(likesSelector)
+
     const cartSelector = cartPropsValidation(useSelector(state => ({
         cart: state.cart
     })))
 
     useEffect(() => {
         dispatch(FetchOneProductAction(id))
+        return () => {
+            setWasLiked(false)
+        }
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(GetLikesAction(id))
+        dispatch(GetDislikesAction(id))
     }, [dispatch])
 
     const addToCart = (product) => {
@@ -39,6 +61,23 @@ export const ProductItem = () => {
         }
     }
 
+    const like = (id) => {
+        dispatch(SetLikeAction(id, token))
+        setHide(true)
+        setWasLiked(true)
+        setTimeout(() => {
+            setHide(false)
+        }, 2000)
+    }
+
+    const dislike = (id) => {
+        dispatch(SetDislikeAction(id, token))
+        setHide(true)
+        setWasLiked(true)
+        setTimeout(() => {
+            setHide(false)
+        }, 2000)
+    }
     return (
         <div>
             <Container maxWidth={"lg"}>
@@ -48,9 +87,14 @@ export const ProductItem = () => {
                 </Link>
                 <Box mt={4} mb={4}>
                     <ProductCard
+                        like={like}
+                        wasLiked={wasLiked}
+                        hide={hide}
+                        dislike={dislike}
                         productData={productData}
                         addToCart={addToCart}
                         cartSelector={cartSelector}
+                        likesSelector={likesSelector}
                     />
                 </Box>
             </Container>

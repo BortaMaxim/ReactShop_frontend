@@ -18,6 +18,7 @@ import {adminCategoriesPropTypesValidation} from "../../../propTypes/adminPropTy
 import {categoriesPropsValidation} from "../../../propTypes/categoriesProps/categoriesPropsValidation";
 
 export const CategoryManagement = () => {
+    const token = localStorage.getItem('user-token')
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -48,7 +49,7 @@ export const CategoryManagement = () => {
         history.push(`/user/admin/category/edit/${id}`)
     }
     const handleDelete = (id) => {
-        dispatch(DeleteCategoryAction(id))
+        dispatch(DeleteCategoryAction(id, token))
         dispatch(HideCategoryAction(id))
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())
@@ -58,7 +59,7 @@ export const CategoryManagement = () => {
         e.preventDefault()
         let formData = new FormData()
         formData.append('name', fields.category_name)
-        dispatch(CreateCategoryAction(formData, history))
+        dispatch(CreateCategoryAction(formData, history, token))
         clear()
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())

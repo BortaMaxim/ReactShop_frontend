@@ -25,8 +25,10 @@ export const Header = (props) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
+
     const logout = () => {
         dispatch(LogoutAction())
+        localStorage.clear()
         history.push('/user/login')
     }
     const token = localStorage.getItem('user-token')

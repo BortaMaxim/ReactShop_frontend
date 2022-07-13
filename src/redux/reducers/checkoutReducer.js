@@ -13,14 +13,6 @@ export const checkoutReducer = (state = initialState, action) => {
                 ...state,
                 isChecking: true
             }
-        case CheckoutTypes.GET_CLIENT_SECRET_SUCCESS:
-            return {
-                ...state,
-            }
-        case CheckoutTypes.GET_CLIENT_SECRET_ERROR:
-            return {
-                ...state,
-            }
         case CheckoutTypes.CONFIRM_CHECKOUT_SUCCESS:
             return {
                 ...state,

@@ -2,24 +2,24 @@ import * as AdminProductsTypes from '../types/AdminProductsTypes'
 import axios from 'axios'
 import {BASE_URL, getOptions, postOptions} from "../utils/options";
 
-export const AdminProductsFetchProductsAction = () => async (dispatch) => {
+export const AdminProductsFetchProductsAction = (token) => async (dispatch) => {
     dispatch({type: AdminProductsTypes.IS_LOAD_PRODUCTS})
-    await axios.get(`${BASE_URL}/get-all-products`, getOptions).then(res => {
+    await axios.get(`${BASE_URL}/get-all-products`, getOptions(token)).then(res => {
         dispatch({type: AdminProductsTypes.FETCH_PRODUCTS_SUCCESS, payload: res.data})
     }).catch(error => {
         dispatch({type: AdminProductsTypes.FETCH_PRODUCTS_ERROR, error})
     })
 }
 
-export const AdminFetchOneProductAction = (id) => async (dispatch) => {
-    await axios.get(`${BASE_URL}/get-one-product/${id}`, getOptions).then(res => {
+export const AdminFetchOneProductAction = (id, token) => async (dispatch) => {
+    await axios.get(`${BASE_URL}/get-one-product/${id}`, getOptions(token)).then(res => {
         dispatch({type: AdminProductsTypes.FETCH_ONE_PRODUCTS_SUCCESS, payload: res.data})
     })
 }
 
-export const AdminCreateProductAction = (formData, history) => async (dispatch) => {
+export const AdminCreateProductAction = (formData, history, token) => async (dispatch) => {
     dispatch({type: AdminProductsTypes.IS_CREATE_PRODUCT})
-    await axios.post(`${BASE_URL}/get-products/create`, formData, postOptions).then(res => {
+    await axios.post(`${BASE_URL}/get-products/create`, formData, postOptions(token)).then(res => {
         dispatch({type: AdminProductsTypes.CREATED_PRODUCT_SUCCESS, payload: res.data})
         history.push('/user/admin/product/create')
     }).catch(error => {
@@ -27,9 +27,9 @@ export const AdminCreateProductAction = (formData, history) => async (dispatch) 
     })
 }
 
-export const AdminUpdateProductAction = (formData, id, history) => async (dispatch) => {
+export const AdminUpdateProductAction = (formData, id, history, token) => async (dispatch) => {
     dispatch({type: AdminProductsTypes.IS_UPDATING_PRODUCT})
-    await axios.post(`${BASE_URL}/get-products/update/${id}`, formData, postOptions).then(res => {
+    await axios.post(`${BASE_URL}/get-products/update/${id}`, formData, postOptions(token)).then(res => {
         dispatch({type: AdminProductsTypes.UPDATED_PRODUCTS_SUCCESS, payload: res.data})
         history.push(`/user/admin/product/edit/${id}`)
     }).catch(error => {
@@ -37,8 +37,8 @@ export const AdminUpdateProductAction = (formData, id, history) => async (dispat
     })
 }
 
-export const AdminDeleteProductAction = (id) => async (dispatch) => {
-    await axios.delete(`${BASE_URL}/get-products/delete/${id}`, getOptions).then(res => {
+export const AdminDeleteProductAction = (id, token) => async (dispatch) => {
+    await axios.delete(`${BASE_URL}/get-products/delete/${id}`, getOptions(token)).then(res => {
         dispatch({type: AdminProductsTypes.DELETE_PRODUCT_SUCCESS, payload: res.data})
     }).catch(error => {
         dispatch({type: AdminProductsTypes.DELETE_PRODUCT_ERROR, payload: error})

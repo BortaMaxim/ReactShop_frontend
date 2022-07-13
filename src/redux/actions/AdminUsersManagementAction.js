@@ -23,26 +23,26 @@ export const GetOneUserAction = (id) => async (dispatch) => {
     })
 }
 
-export const CreateUserAction = (formData) => async (dispatch) => {
+export const CreateUserAction = (formData, token) => async (dispatch) => {
     dispatch({type: AdminUsersTypes.IS_CREATING_USER})
-    await axios.post(`${BASE_URL}/create-users`, formData, postWithUploadOptions).then(res => {
+    await axios.post(`${BASE_URL}/create-users`, formData, postWithUploadOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.USER_CREATED_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.USER_CREATED_ERROR, error})
     })
 }
 
-export const UpdateUserAction = (formData, id) => async (dispatch) => {
+export const UpdateUserAction = (formData, id, token) => async (dispatch) => {
     dispatch({type: AdminUsersTypes.IS_UPDATING_USER})
-    await axios.post(`${BASE_URL}/update-users/${id}`, formData, postWithUploadOptions).then(res => {
+    await axios.post(`${BASE_URL}/update-users/${id}`, formData, postWithUploadOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.UPDATED_USER_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.UPDATED_USER_ERROR, error})
     })
 }
 
-export const DeleteUserAction = (id) => async (dispatch) => {
-    axios.delete(`${BASE_URL}/delete-users/${id}`, getOptions).then(res => {
+export const DeleteUserAction = (id, token) => async (dispatch) => {
+    axios.delete(`${BASE_URL}/delete-users/${id}`, getOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.DELETE_USER_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.DELETE_USER_ERROR, error})

@@ -26,6 +26,7 @@ export const UserManagement = () => {
 
     const history = useHistory()
     const dispatch = useDispatch()
+    const token = localStorage.getItem('user-token')
 
     useEffect(() => {
         dispatch(GetUsersAction())
@@ -36,7 +37,7 @@ export const UserManagement = () => {
     }
 
     const handleDeleteUser = (id) => {
-        dispatch(DeleteUserAction(id))
+        dispatch(DeleteUserAction(id, token))
         dispatch(HideUserAction(id))
         setTimeout(() => {
             dispatch(HideNotificationAction())

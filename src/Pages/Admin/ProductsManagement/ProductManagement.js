@@ -12,6 +12,7 @@ import {IsHideNotificationsAction} from "../../../redux/actions/AdminCategoryMan
 import {productsPropsValidator} from "../../../propTypes/adminPropTypes/productsPropsValidator";
 
 export const ProductManagement = () => {
+    const token = localStorage.getItem('user-token')
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -23,14 +24,14 @@ export const ProductManagement = () => {
     })))
 
     useEffect(() => {
-        dispatch(AdminProductsFetchProductsAction())
+        dispatch(AdminProductsFetchProductsAction(token))
     }, [dispatch])
 
     const handleEdit = (id) => {
         history.push(`/user/admin/product/edit/${id}`)
     }
     const handleDelete = (id) => {
-        dispatch(AdminDeleteProductAction(id))
+        dispatch(AdminDeleteProductAction(id, token))
         dispatch(AdminHideProductAction(id))
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())

@@ -12,6 +12,7 @@ import {adminCategoriesPropTypesValidation} from "../../../propTypes/adminPropTy
 
 
 export const CategoryManagementEdit = () => {
+    const token = localStorage.getItem('user-token')
     const history = useHistory()
     const dispatch = useDispatch()
     const {id} = useParams()
@@ -35,7 +36,7 @@ export const CategoryManagementEdit = () => {
     }, [viewCategorySelector.category])
 
     useEffect(() => {
-        dispatch(ViewCategoryAction(id))
+        dispatch(ViewCategoryAction(id, token))
     }, [dispatch])
 
     const handleChange = (e) => {
@@ -49,7 +50,7 @@ export const CategoryManagementEdit = () => {
         e.preventDefault()
         let formData = new FormData()
         formData.append('name', fields.name)
-        dispatch(UpdateCategoryAction(formData, id))
+        dispatch(UpdateCategoryAction(formData, id, token))
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())
         }, 3000)

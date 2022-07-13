@@ -12,7 +12,7 @@ import {useDispatch} from "react-redux";
 import {UpdateProfileAction} from "../../redux/actions/ProfileAction";
 
 const Profile = (props) => {
-    const {fields, handleChange, handleUpload, profileSelector} = props
+    const {fields, handleChange, handleUpload, profileSelector, token} = props
     const [editModalOpen, setEditModalOpen, editToggle] = useModal()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Profile = (props) => {
         formData.append('password', fields.password)
         formData.append('password_confirmation', fields.password_confirmation)
         e.preventDefault()
-        dispatch(UpdateProfileAction(formData, history))
+        dispatch(UpdateProfileAction(formData, history, token))
     }
     return (
         <div>

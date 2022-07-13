@@ -8,6 +8,7 @@ import {CreateUserAction, IsHideAction} from "../../../redux/actions/AdminUsersM
 import {usersPropsValidation} from '../../../propTypes/adminPropTypes/usersPropsValidation'
 
 export const UserManagementCreate = () => {
+    const token = localStorage.getItem('user-token')
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -49,7 +50,7 @@ export const UserManagementCreate = () => {
         formData.append('password', fields.password)
         formData.append('password_confirmation', fields.password_confirmation)
         formData.append('roles', fields.roles)
-        dispatch(CreateUserAction(formData))
+        dispatch(CreateUserAction(formData, token))
         setTimeout(() => {
             dispatch(IsHideAction())
         }, 3000)

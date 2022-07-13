@@ -20,6 +20,7 @@ import {adminProductsManagementCreateReducer} from "./adminProducts/adminProduct
 import {adminProductsManagementEditReducer} from "./adminProducts/adminProductsManagementEditReducer";
 import {adminProductsManagementDeleteReducer} from "./adminProducts/adminProductsManagementDeleteReducer";
 import {checkoutReducer} from "./checkoutReducer";
+import {likesReducer} from "./likesReducer";
 
 export const rootReducer = combineReducers({
     form: formReducer,
@@ -43,4 +44,5 @@ export const rootReducer = combineReducers({
     adminUpdateProduct: adminProductsManagementEditReducer,
     adminDeleteProduct: adminProductsManagementDeleteReducer,
     checkout: checkoutReducer,
+    likesDislikes: likesReducer,
 })

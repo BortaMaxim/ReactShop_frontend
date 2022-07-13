@@ -8,15 +8,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {BillingAddressAction, ConfirmPaymentAction} from "../../redux/actions/CheckoutAction";
 import {billingDetails, shipping} from "./utils";
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
+import {checkoutPropsValidation} from "../../propTypes/checkoutPropTypes/checkoutPropsValidation";
+import {profilePropsValidation} from "../../propTypes/profileProps/profilePropsValidation";
 
 const Checkout = () => {
-    const checkoutSelector = useSelector(state => ({
+    const checkoutSelector = checkoutPropsValidation(useSelector(state => ({
         isChecking: state.checkout.isChecking,
         checkoutSuccess: state.checkout.checkoutSuccess,
         checkoutError: state.checkout.checkoutError,
-    }))
-    console.log(checkoutSelector)
+    })))
 
+    const token = localStorage.getItem('user-token')
     const stripe = useStripe()
     const elements = useElements()
     const history = useHistory()
@@ -24,7 +26,7 @@ const Checkout = () => {
     const [clientSecret, setClientSecret] = useState('')
     const [hide, setHide] = useState(null)
 
-    const profileSelector = useSelector(state => state.profile.profileResponse)
+    const profileSelector = profilePropsValidation(useSelector(state => state.profile.profileResponse))
 
     let totalCart = localStorage.getItem('total-cart')
     const {fields, handleChange, clear} = useForm({
@@ -40,7 +42,7 @@ const Checkout = () => {
 
     useEffect(() => {
         const formData = billingDetails(totalCart, fields)
-        dispatch(BillingAddressAction(formData, setClientSecret))
+        dispatch(BillingAddressAction(formData, setClientSecret, token))
         return () => {}
     }, [dispatch])
 
@@ -56,7 +58,7 @@ const Checkout = () => {
         }, 5000)
         clear()
     }
-    console.log(clientSecret)
+
     const removeItem = () => {
         localStorage.removeItem('total-cart')
         history.push(`/home`)

@@ -12,7 +12,7 @@ export class HttpServices {
     getData = async (added_url, tokenId = "") => {
         const token = await localStorage.getItem(tokenId);
         const requestOptions = this.getRequestOptions(token);
-        return fetch(this.url + "/" + added_url, requestOptions).then(
+        return await fetch(this.url + "/" + added_url, requestOptions).then(
             response => response.json()
         )
     }
@@ -31,13 +31,13 @@ export class HttpServices {
     }
 
 getRequestOptions = (token) => {
-    let getRequestOption = {
+    let requestOption = {
         method: 'GET',
         headers: {
             'Authorization': `Bearer  ${token}`,
             'Content-type': 'application/json'
         },
     }
-    return getRequestOption
+    return requestOption
 }
 }
