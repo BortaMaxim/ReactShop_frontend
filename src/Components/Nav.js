@@ -16,16 +16,16 @@ import {useDispatch} from "react-redux";
 import {ViewProfileAction} from "../redux/actions/ProfileAction";
 
 export const Nav = (props) => {
-    const {profileSelector, token, categoriesSelector, categoryGetOne, cartSelector} = props
+    const {profileSelector, tokenVerified, categoriesSelector, categoryGetOne, cartSelector} = props
     const [modalOpen, setModalOpen, toggleModal] = useModal()
     const [drawerOpen, setDrawerOpen] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(token) {
+        if(tokenVerified) {
             dispatch(ViewProfileAction())
         }
-    }, [dispatch, token])
+    }, [dispatch, tokenVerified])
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen)
@@ -53,7 +53,7 @@ export const Nav = (props) => {
                             </NavLink>
                         </div>
                         {
-                            token !== null && token !== ''
+                            tokenVerified !== null && tokenVerified !== ''
                                 ? <div className={classes.nav_right}>
                                     {
                                         profileSelector.profileResponse.success === true

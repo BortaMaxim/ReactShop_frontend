@@ -22,15 +22,16 @@ export const PrivateRoute = (props) => {
                         <Route  path={`${props.match.path}/cart`} component={Cart}/>
 
                         <Route  path={props.match.path} render={props => (
-                            <Redirect to={{pathname: `/home`}}/>
+                            <Redirect to={{pathname: `${props.match.path}/profile`}}/>
                         )}/>
                     </Switch>
                     // Auth User
                     : <Switch>
                         <Route  path={`${props.match.path}/profile`} component={ProfileContainer}/>
                         <Route  path={`${props.match.path}/cart`} component={Cart}/>
+
                         <Route  path={props.match.path} render={props => (
-                            <Redirect to={{pathname: `/home`}}/>
+                            <Redirect to={{pathname: `${props.match.path}/profile`}}/>
                         )}/>
                         <Route  path="*" render={props => (
                             <Redirect to={{pathname: '/home'}}/>

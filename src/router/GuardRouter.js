@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Redirect} from "react-router-dom";
 
-export const GuardRouter = ({component: Component, token: Token, routeRedirect, ...rest}) => {
+export const GuardRouter = ({component: Component, tokenVerified: Token, routeRedirect, ...rest}) => {
     return (
         <Route {...rest} component={(props) => (
             localStorage.getItem(Token)

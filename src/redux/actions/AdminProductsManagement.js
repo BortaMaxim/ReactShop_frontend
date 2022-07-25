@@ -5,7 +5,7 @@ import {BASE_URL, getOptions, postOptions} from "../utils/options";
 export const AdminProductsFetchProductsAction = (token) => async (dispatch) => {
     dispatch({type: AdminProductsTypes.IS_LOAD_PRODUCTS})
     await axios.get(`${BASE_URL}/get-all-products`, getOptions(token)).then(res => {
-        dispatch({type: AdminProductsTypes.FETCH_PRODUCTS_SUCCESS, payload: res.data})
+        dispatch({type: AdminProductsTypes.FETCH_PRODUCTS_SUCCESS, payload: res.data.data})
     }).catch(error => {
         dispatch({type: AdminProductsTypes.FETCH_PRODUCTS_ERROR, error})
     })

@@ -5,9 +5,19 @@ import {Box, Button, CircularProgress, Container, Typography} from '@material-ui
 import {Field} from "redux-form";
 import {renderTextField} from "../../redux-form/renderTextField";
 import {Link} from "react-router-dom";
+import {CustomSnackBar} from "../../Components/FelpersComponent/CustomSnackBar";
 
 const Register = (props) => {
-    const {handleChange, fields, onSubmit, registerSelector} = props
+    const {
+        handleChange,
+        fields,
+        onSubmit,
+        registerSelector,
+        open,
+        handleClose,
+        vertical,
+        horizontal
+    } = props
 
     return (
         <div>
@@ -15,8 +25,20 @@ const Register = (props) => {
                 <Container maxWidth={'sm'}>
                     <div className={classes.auth_wrapper}>
                         {
-                            registerSelector.authResponse.success === true
-                                ? <h2 className={classes.auth_title}>{registerSelector.authResponse.message}</h2>
+                            registerSelector.isHide === false
+                                ? <>
+                                    {
+                                        registerSelector.authResponse.success === true
+                                            ?  <CustomSnackBar
+                                                message={registerSelector.authResponse.message}
+                                                open={open}
+                                                vertical={vertical}
+                                                horizontal={horizontal}
+                                                handleClose={handleClose}
+                                            />
+                                            : null
+                                    }
+                                </>
                                 : null
                         }
                         <Typography align={"center"} variant={'h4'} color={"primary"}>
@@ -80,10 +102,10 @@ const Register = (props) => {
                                 />
                             </Box>
                             <Box mt={2}>
-                                <Button type={"submit"} fullWidth={true} color={"primary"} variant={"contained"}>
+                                <Button type={"submit"} fullWidth={true} color={"primary"} variant={"outlined"}>
                                     {
                                         registerSelector.isAuthLoading === true
-                                            ? <CircularProgress color={"secondary"}/>
+                                            ? <CircularProgress color={"primary"}/>
                                             : <Typography>Registration</Typography>
                                     }
                                 </Button>

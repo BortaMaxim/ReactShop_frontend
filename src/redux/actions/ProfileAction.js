@@ -2,7 +2,7 @@ import * as AuthUserTypes from '../types/AuthUserTypes'
 import * as ProfileUserTypes from '../types/ProfileUserTypes'
 import axios from 'axios'
 import {ProfileServices} from "../../services/ProfileServices";
-import {postOptions, postWithUploadOptions} from '../utils/options'
+import {postWithUploadOptions} from '../utils/options'
 
 let profileServices = new ProfileServices()
 const BASE_URL = 'http://localhost:8000/api/auth'

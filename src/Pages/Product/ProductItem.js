@@ -10,6 +10,7 @@ import {productPropsValidation} from "../../propTypes/productProps/productPropsV
 import {cartPropsValidation} from "../../propTypes/cartProps/cartPropsValidation";
 import {GetDislikesAction, GetLikesAction, SetDislikeAction, SetLikeAction} from "../../redux/actions/LikesAction";
 import {likesPropsValidation} from "../../propTypes/likesPropTypes/likesPropsValidation";
+import {useOpen} from "../../hooks/useOpen";
 
 export const ProductItem = () => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export const ProductItem = () => {
     const {id} = useParams()
     const [hide, setHide] = useState(null)
     const [wasLiked, setWasLiked] = useState(false)
+    const {open, vertical, horizontal, handleOpen, handleClose} = useOpen()
 
     const productData = productPropsValidation(useSelector(state => {
         return {
@@ -33,7 +35,6 @@ export const ProductItem = () => {
         likeResponse: state.likesDislikes.likeResponse,
         dislikeResponse: state.likesDislikes.dislikeResponse,
     })))
-    console.log(likesSelector)
 
     const cartSelector = cartPropsValidation(useSelector(state => ({
         cart: state.cart
@@ -44,25 +45,31 @@ export const ProductItem = () => {
         return () => {
             setWasLiked(false)
         }
-    }, [dispatch])
+    }, [dispatch, id])
 
     useEffect(() => {
         dispatch(GetLikesAction(id))
         dispatch(GetDislikesAction(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     const addToCart = (product) => {
-        dispatch(AddToCartAction(product))
-        const token = localStorage.getItem('user-token')
         if (!token) {
             return history.push('/user/login')
         }else {
-            return history.push('/user/cart')
+            dispatch(AddToCartAction(product))
+            history.push('/user/cart')
         }
     }
 
     const like = (id) => {
+        if(!token) {
+            return history.push('/user/login')
+        }
         dispatch(SetLikeAction(id, token))
+        handleOpen({
+            vertical: 'bottom',
+            horizontal: 'left'
+        })
         setHide(true)
         setWasLiked(true)
         setTimeout(() => {
@@ -71,7 +78,14 @@ export const ProductItem = () => {
     }
 
     const dislike = (id) => {
+        if(!token) {
+            return history.push('/user/login')
+        }
         dispatch(SetDislikeAction(id, token))
+        handleOpen({
+            vertical: 'bottom',
+            horizontal: 'left'
+        })
         setHide(true)
         setWasLiked(true)
         setTimeout(() => {
@@ -87,6 +101,10 @@ export const ProductItem = () => {
                 </Link>
                 <Box mt={4} mb={4}>
                     <ProductCard
+                        open={open}
+                        vertical={vertical}
+                        horizontal={horizontal}
+                        handleClose={handleClose}
                         like={like}
                         wasLiked={wasLiked}
                         hide={hide}

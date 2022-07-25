@@ -7,11 +7,25 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import {Box, Button, CircularProgress, Typography} from "@mui/material";
 import {Slider} from "../../Components/FelpersComponent/Carousel/Slider";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {CustomSnackBar} from "../../Components/FelpersComponent/CustomSnackBar";
+import {ProductComments} from "./ProductComments";
 
 export const ProductGallery = createContext(null)
 
 export const ProductCard = (props) => {
-    const {productData, addToCart, like, dislike, likesSelector, hide, wasLiked} = props
+    const {
+        productData,
+        addToCart,
+        like,
+        dislike,
+        likesSelector,
+        hide,
+        wasLiked,
+        open,
+        vertical,
+        horizontal,
+        handleClose
+    } = props
     const {isLike, isDislike, dislikeResponse, likeResponse, download} = likesSelector
 
     return (
@@ -22,7 +36,7 @@ export const ProductCard = (props) => {
                     {
                         productData.isLoadProducts === true
                             ? <CustomCircularProgress/>
-                            : <div>
+                            : <>
                                 {
                                     productData.product !== ''
                                     && <div className={classes.product_card}>
@@ -32,7 +46,13 @@ export const ProductCard = (props) => {
                                                 ? <div>
                                                     {
                                                         dislikeResponse.success === false
-                                                            ? <Typography>{dislikeResponse.message}</Typography>
+                                                            ? <CustomSnackBar
+                                                                message={dislikeResponse.message}
+                                                                open={open}
+                                                                handleClose={handleClose}
+                                                                vertical={vertical}
+                                                                horizontal={horizontal}
+                                                            />
                                                             : null
                                                     }
                                                 </div>
@@ -43,7 +63,13 @@ export const ProductCard = (props) => {
                                                 ? <div>
                                                     {
                                                         likeResponse.success === false
-                                                            ? <Typography>{likeResponse.message}</Typography>
+                                                            ? <CustomSnackBar
+                                                                message={likeResponse.message}
+                                                                open={open}
+                                                                handleClose={handleClose}
+                                                                vertical={vertical}
+                                                                horizontal={horizontal}
+                                                            />
                                                             : null
                                                     }
                                                 </div>
@@ -123,11 +149,12 @@ export const ProductCard = (props) => {
                                                         <AddShoppingCartIcon/>
                                                     </Button>
                                                 </div>
+                                                <ProductComments />
                                             </div>
                                         </div>
                                     </div>
                                 }
-                            </div>
+                            </>
                     }
                 </ProductGallery.Provider>
             }

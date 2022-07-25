@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Login from './Login'
 import validate from '../../redux-form/validateReduxForm'
 import {reduxForm} from "redux-form";
@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import {loginPropsValidation} from "../../propTypes/loginProps/loginPropsValidation";
 import {IsHideNotificationsAction} from "../../redux/actions/AdminCategoryManagementAction";
 import {useForm} from "../../hooks/useForm";
+import {useOpen} from "../../hooks/useOpen";
 
 
 const LoginContainer = (props) => {
@@ -23,13 +24,14 @@ const LoginContainer = (props) => {
         email: '',
         password: '',
     })
+    const {open, vertical, horizontal, handleOpen, handleClose} = useOpen()
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
 
-
     const login = (e) => {
         e.preventDefault()
-        dispatch(LoginAction(fields, history))
+        dispatch(LoginAction(fields, history, setError, handleOpen))
         clear()
         setTimeout(() => {
             dispatch(IsHideNotificationsAction())
@@ -41,6 +43,11 @@ const LoginContainer = (props) => {
                 {...props}
                 loginSelector={loginSelector}
                 fields={fields}
+                open={open}
+                vertical={vertical}
+                horizontal={horizontal}
+                handleClose={handleClose}
+                error={error}
                 handleChange={handleChange}
                 onSubmit={login}
             />

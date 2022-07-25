@@ -71,6 +71,18 @@ export const CheckoutForm = (props) => {
                         />
                     </Box>
                     <Box mt={2}>
+                        {
+                            hide === false
+                                ? <>
+                                    {
+                                        checkoutSelector.checkoutError.type = 'invalid_request_error'
+                                            && <Typography color={'secondary'}>
+                                                {checkoutSelector.checkoutError.message}
+                                            </Typography>
+                                    }
+                                </>
+                                : null
+                        }
                         <TextField
                             type="text"
                             name="country"
@@ -118,22 +130,23 @@ export const CheckoutForm = (props) => {
                             ? <div>
                                 {
                                     checkoutSelector.checkoutError.code === "incomplete_number"
-                                    ? <Typography color={'secondary'}>{checkoutSelector.checkoutError.message}</Typography>
-                                    : null
+                                        ? <Typography
+                                            color={'secondary'}>{checkoutSelector.checkoutError.message}</Typography>
+                                        : null
                                 }
                             </div>
                             : null
                     }
                     {
                         hide === false
-                        ? <div>
+                            ? <div>
                                 {
                                     checkoutSelector.checkoutSuccess.status === "succeeded"
-                                    ? <Typography color={'primary'}>Checkout success! :)</Typography>
-                                    : null
+                                        ? <Typography color={'primary'}>Checkout success! :)</Typography>
+                                        : null
                                 }
                             </div>
-                        : null
+                            : null
                     }
                 </Box>
                 <Box mt={2}>

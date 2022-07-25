@@ -15,7 +15,8 @@ export const useInfinityScroll = (props) => {
     const history = useHistory()
 
     const loadItems = async (page, itemCombineMethod) => {
-        const data = await getItems({page})
+        const data =  await getItems({page})
+
         setHasNext(data.data.last_page > pageToLoad.current)
         setItems((prevItems) => {
             return itemCombineMethod === 'prepend'
@@ -30,14 +31,13 @@ export const useInfinityScroll = (props) => {
         await loadItems(pageToLoad.current, 'append')
     }
 
-    useEffect(() => {
+    useEffect( () => {
         if (initialPageLoaded.current) {
             return
         }
-        loadItems(pageToLoad.current, 'append')
+         loadItems(pageToLoad.current, 'append')
         initialPageLoaded.current = true
-
-    }, [loadItems, initialPageLoaded])
+    })
 
     return {
         items, hasNext, loadNext

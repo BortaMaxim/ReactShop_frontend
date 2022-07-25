@@ -15,6 +15,8 @@ import {UserManagementCreate} from "../Pages/Admin/UserManagement/UserManagement
 import {CategoryManagementEdit} from "../Pages/Admin/CategoryManagement/CategoryManagementEdit";
 import {ProductAdminCreateForm} from "../Pages/Admin/ProductsManagement/ProductAdminCreateForm";
 import {ProductAdminEdit} from "../Pages/Admin/ProductsManagement/ProductAdminEdit";
+import {EmailVerifiedSuccess} from "../Pages/EmailVerified/EmailVerifiedSuccess";
+import {EmailAlreadyVerified} from "../Pages/EmailVerified/EmailAlreadyVerified";
 
 export const AppRoutes = () => {
     return (
@@ -54,18 +56,25 @@ export const AppRoutes = () => {
                 <Route path="/user/admin/product/edit/:id">
                     <ProductAdminEdit />
                 </Route>
+                <Route path="/email-verified-success">
+                    <EmailVerifiedSuccess />
+                </Route>
+                <Route path="/email-already-verified">
+                    <EmailAlreadyVerified />
+                </Route>
                 <Route path={'/no-match'}>
                     <NoMatch />
                 </Route>
                 <GuardRouter
                     path={'/user'}
-                    token={'user-token'}
+                    tokenVerified={'email-verified'}
                     routeRedirect={'/user/login'}
                     component={PrivateRoute}
                 />
                 <Route exact path="*" render={props => (
                     <Redirect to={{pathname: '/home'}}/>
                 )}/>
+
             </Switch>
         </BrowserRouter>
     )

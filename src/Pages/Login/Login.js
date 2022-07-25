@@ -5,20 +5,33 @@ import classes from "../../styles/Auth.module.css";
 import {Field} from "redux-form";
 import {renderTextField} from "../../redux-form/renderTextField";
 import {Link} from "react-router-dom";
+import {CustomSnackBar} from "../../Components/FelpersComponent/CustomSnackBar";
 
 const Login = (props) => {
-    const {fields, loginSelector, handleChange, onSubmit} = props
+    const {fields, loginSelector, handleChange, onSubmit, error, open, horizontal, vertical, handleClose} = props
     return (
         <div>
             <Box mt={14}>
                 <Container maxWidth={'sm'}>
                     <div className={classes.auth_wrapper}>
+                        <>
+                            {
+                                error !== ''
+                                && <Typography color={'secondary'}>{error}</Typography>
+                            }
+                        </>
                         {
                             loginSelector.isHide === false
                             ? <div>
                                     {
                                         loginSelector.authResponse.success === true
-                                            ? <h2 className={classes.auth_title}>{loginSelector.authResponse.message}</h2>
+                                            ? <CustomSnackBar
+                                                message={loginSelector.authResponse.message}
+                                                open={open}
+                                                horizontal={horizontal}
+                                                vertical={vertical}
+                                                handleClose={handleClose}
+                                            />
                                             : null
                                     }
                                     {
@@ -65,10 +78,10 @@ const Login = (props) => {
                                 />
                             </Box>
                             <Box mt={2}>
-                                <Button type={"submit"} fullWidth={true} color={"primary"} variant={"contained"}>
+                                <Button type={"submit"} fullWidth={true} color={"primary"} variant={"outlined"}>
                                     {
                                         loginSelector.isAuthLoading === true
-                                            ? <CircularProgress color={"secondary"}/>
+                                            ? <CircularProgress color={"primary"}/>
                                             : <Typography>Login</Typography>
                                     }
                                 </Button>

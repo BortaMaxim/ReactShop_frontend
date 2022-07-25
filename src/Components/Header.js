@@ -9,6 +9,9 @@ import {ScrollToTop} from "./FelpersComponent/ScrollToTop";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {profilePropsValidation} from "../propTypes/profileProps/profilePropsValidation";
 import {categoriesPropsValidation} from "../propTypes/categoriesProps/categoriesPropsValidation";
+import {useOpen} from "../hooks/useOpen";
+import {loginPropsValidation} from "../propTypes/loginProps/loginPropsValidation";
+import {CustomSnackBar} from "./FelpersComponent/CustomSnackBar";
 
 
 export const Header = (props) => {
@@ -21,17 +24,24 @@ export const Header = (props) => {
         categories: state.categories.categories,
         category: state.categories.category,
     })))
+
+    const loginSelector = loginPropsValidation(useSelector(state => ({
+            authResponse: state.auth.authResponse,
+        })
+    ))
+
     const cartSelector = useSelector(state => state.cart.numberCart)
 
+    const {open, handleOpen, horizontal, vertical, handleClose} = useOpen()
     const dispatch = useDispatch()
     const history = useHistory()
 
     const logout = () => {
-        dispatch(LogoutAction())
+        dispatch(LogoutAction(handleOpen))
         localStorage.clear()
         history.push('/user/login')
     }
-    const token = localStorage.getItem('user-token')
+    const tokenVerified = localStorage.getItem('email-verified')
 
     useEffect(() => {
         dispatch(FetchCategories())
@@ -45,10 +55,21 @@ export const Header = (props) => {
 
     return (
         <>
+            {
+                loginSelector.authResponse.success === true
+                ? <CustomSnackBar
+                        message={loginSelector.authResponse.message}
+                        open={open}
+                        handleClose={handleClose}
+                        vertical={vertical}
+                        horizontal={horizontal}
+                    />
+                : null
+            }
             <Nav
                 {...props}
                 logout={logout}
-                token={token}
+                tokenVerified={tokenVerified}
                 profileSelector={profileSelector}
                 categoriesSelector={categoriesSelector}
                 categoryGetOne={categoryGetOne}

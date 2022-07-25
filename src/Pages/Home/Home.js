@@ -35,16 +35,18 @@ export const Home = () => {
     }, [dispatch])
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+        if(hasNext === true) {
+            window.addEventListener('scroll', handleScroll)
+        }
 
-    const handleScroll = () => {
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [hasNext])
+
+
+    const handleScroll = async () => {
         const scrollSize = window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
         if (scrollSize) {
-            if (hasNext) {
-                loadNext()
-            }
+            await loadNext()
         }
     }
 
