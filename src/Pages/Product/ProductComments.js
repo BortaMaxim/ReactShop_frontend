@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import classes from '../../styles/PoductComments.module.css'
 import Comments from "./Comments";
 import {ProductCommentsForm} from "./ProductCommentsForm";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "../../hooks/useForm";
 import {GetCommentsAction, SentCommentAction} from "../../redux/actions/CommentsAction";
@@ -14,6 +14,7 @@ export const ProductComments = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
     const token = localStorage.getItem('user-token')
+    const history = useHistory()
 
     const commentSelector = commentsPropsValidation(useSelector(state => ({
         loading: state.comments.loading,
@@ -31,6 +32,9 @@ export const ProductComments = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if(!token) {
+            return  history.push('/user/login')
+        }
         let formData = new FormData()
         formData.append('body', fields.body)
         dispatch(SentCommentAction(formData, id, token))

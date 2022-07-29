@@ -1,8 +1,8 @@
 import React from 'react'
-import classes from '../../styles/Admin.module.css'
 import PropTypes from 'prop-types'
-import {List, ListItem, ListItemText, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Typography} from "@mui/material";
+import {AdminManagement} from "./AdminManagement";
+import {ManagerManagement} from "./ManagerManagement";
 
 export const SiteManagement = (props) => {
     const {profileSelector, roles} = props
@@ -13,39 +13,11 @@ export const SiteManagement = (props) => {
             </Typography>
             {
                 roles === 'admin'
-                && <List>
-                    <Link to={'/user/admin/user'} className={classes.admin_link}>
-                        <ListItem button>
-                            <ListItemText primary={'User Management'}/>
-                        </ListItem>
-                    </Link>
-                    <Link to={'/user/admin/category'} className={classes.admin_link}>
-                        <ListItem button>
-                            <ListItemText primary={'Category Management'}/>
-                        </ListItem>
-                    </Link>
-                    <Link to={'/user/admin/product'} className={classes.admin_link}>
-                        <ListItem button>
-                            <ListItemText primary={'Product Management'}/>
-                        </ListItem>
-                    </Link>
-
-                </List>
+                && <AdminManagement />
             }
             {
                 roles === 'manager'
-                && <List>
-                    <Link to={'/user/admin/category'} className={classes.admin_link}>
-                        <ListItem button>
-                            <ListItemText primary={'Category Management'}/>
-                        </ListItem>
-                    </Link>
-                    <Link to={'/user/admin/product'} className={classes.admin_link}>
-                        <ListItem button>
-                            <ListItemText primary={'Product Management'}/>
-                        </ListItem>
-                    </Link>
-                </List>
+                && <ManagerManagement />
             }
             <hr/>
         </>

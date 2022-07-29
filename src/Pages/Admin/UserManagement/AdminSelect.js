@@ -31,7 +31,7 @@ AdminSelect.propTypes = {
     fields: PropTypes.shape({
         name: PropTypes.string,
         email: PropTypes.string,
-        avatar: PropTypes.string,
+        avatar: PropTypes.any,
         password: PropTypes.string,
         password_confirmation: PropTypes.string,
         roles: PropTypes.string
