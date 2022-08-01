@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 
 
-export const useForm = (initialState = {} , props) => {
+export const useForm = (initialState = {}) => {
     const [fields, setFields] = useState(initialState)
 
     const handleChange = (e) => {

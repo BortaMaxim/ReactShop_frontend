@@ -1,4 +1,4 @@
-export let BASE_URL = 'http://localhost:8000/api/auth'
+export let AUTH_BASE_URL = 'http://localhost:8000/api/auth'
 export const URL = 'http://localhost:8000/api'
 
 export const postWithUploadOptions = (token) => {

@@ -1,10 +1,10 @@
 import * as LikesTypes from '../types/LikesTypes'
 import axios from 'axios'
-import {BASE_URL, URL, postOptions} from "../utils/options";
+import {AUTH_BASE_URL, URL, postOptions} from "../utils/options";
 
 export const SetLikeAction = (id, token) => async (dispatch) => {
     dispatch({type: LikesTypes.IS_LIKE})
-    await axios.post(`${BASE_URL}/product/${id}/like`, null, postOptions(token)).then(res => {
+    await axios.post(`${AUTH_BASE_URL}/product/${id}/like`, null, postOptions(token)).then(res => {
         if (res.hasOwnProperty('success') && res.data.success === true) {
             dispatch({type: LikesTypes.LIKE_SUCCESS, payload: res.data})
         }else {
@@ -15,7 +15,7 @@ export const SetLikeAction = (id, token) => async (dispatch) => {
 
 export const SetDislikeAction = (id, token) => async (dispatch) => {
     dispatch({type: LikesTypes.IS_DISLIKE})
-    await axios.post(`${BASE_URL}/product/${id}/dislike`, null, postOptions(token)).then(res => {
+    await axios.post(`${AUTH_BASE_URL}/product/${id}/dislike`, null, postOptions(token)).then(res => {
         if (res.hasOwnProperty('success') && res.data.success === true) {
             dispatch({type: LikesTypes.DISLIKE_SUCCESS, payload: res.data})
         }else {

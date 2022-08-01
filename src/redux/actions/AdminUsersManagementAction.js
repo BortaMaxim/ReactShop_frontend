@@ -1,7 +1,7 @@
 import * as AdminUsersTypes from '../types/AdminUsersTypes'
 import axios from 'axios'
 import {AdminUsersServices} from "../../services/AdminUsersServices";
-import {BASE_URL, getOptions, postWithUploadOptions} from "../utils/options";
+import {AUTH_BASE_URL, getOptions, postWithUploadOptions} from "../utils/options";
 
 let adminUserServices = new AdminUsersServices()
 
@@ -25,7 +25,7 @@ export const GetOneUserAction = (id) => async (dispatch) => {
 
 export const CreateUserAction = (formData, token) => async (dispatch) => {
     dispatch({type: AdminUsersTypes.IS_CREATING_USER})
-    await axios.post(`${BASE_URL}/create-users`, formData, postWithUploadOptions(token)).then(res => {
+    await axios.post(`${AUTH_BASE_URL}/create-users`, formData, postWithUploadOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.USER_CREATED_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.USER_CREATED_ERROR, error})
@@ -34,7 +34,7 @@ export const CreateUserAction = (formData, token) => async (dispatch) => {
 
 export const UpdateUserAction = (formData, id, token) => async (dispatch) => {
     dispatch({type: AdminUsersTypes.IS_UPDATING_USER})
-    await axios.post(`${BASE_URL}/update-users/${id}`, formData, postWithUploadOptions(token)).then(res => {
+    await axios.post(`${AUTH_BASE_URL}/update-users/${id}`, formData, postWithUploadOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.UPDATED_USER_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.UPDATED_USER_ERROR, error})
@@ -42,7 +42,7 @@ export const UpdateUserAction = (formData, id, token) => async (dispatch) => {
 }
 
 export const DeleteUserAction = (id, token) => async (dispatch) => {
-    axios.delete(`${BASE_URL}/delete-users/${id}`, getOptions(token)).then(res => {
+    axios.delete(`${AUTH_BASE_URL}/delete-users/${id}`, getOptions(token)).then(res => {
         dispatch({type: AdminUsersTypes.DELETE_USER_SUCCESS, payload: res})
     }).catch(error => {
         dispatch({type: AdminUsersTypes.DELETE_USER_ERROR, error})

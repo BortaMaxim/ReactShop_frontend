@@ -1,8 +1,7 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import {Button} from "@mui/material";
 import {green, orange, red} from "@mui/material/colors";
-import warning from "react-redux/lib/utils/warning";
 
 
 export const GreenButton = styled(Button)(({theme}) => ({

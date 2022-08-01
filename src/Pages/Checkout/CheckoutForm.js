@@ -83,14 +83,26 @@ export const CheckoutForm = (props) => {
                                 </>
                                 : null
                         }
-                        <TextField
-                            type="text"
-                            name="country"
-                            fullWidth={true}
-                            label="country"
-                            value={country}
-                            onChange={handleChange}
-                        />
+                        <InputLabel id="country">Country:</InputLabel>
+                        {
+                            checkoutSelector.ISOCountries !== undefined
+                            && <Select
+                                labelId="country"
+                                name={'country'}
+                                autoWidth
+                                label="country"
+                                onChange={handleChange}
+                                value={country}
+                            >
+                                {
+                                    checkoutSelector.ISOCountries.map(el => (
+                                        <MenuItem value={el.country} key={el.id}>
+                                            <em>{el.country}</em>
+                                        </MenuItem>
+                                    ))
+                                }
+                            </Select>
+                        }
                     </Box>
                     <Box mt={2}>
                         <TextField

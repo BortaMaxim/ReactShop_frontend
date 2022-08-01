@@ -1,9 +1,9 @@
 import axios from 'axios'
 import * as CheckoutTypes from '../types/CheckoutTypes'
-import {BASE_URL, postOptions} from '../utils/options'
+import {AUTH_BASE_URL, postOptions} from '../utils/options'
 
 export const BillingAddressAction = (formData, setClientSecret, token) => async (dispatch) => {
-    await axios.post(`${BASE_URL}/stripe`, formData, postOptions(token)).then(res => {
+    await axios.post(`${AUTH_BASE_URL}/stripe`, formData, postOptions(token)).then(res => {
         if (res.data.hasOwnProperty('success') && res.data.success === true) {
             setClientSecret(res.data.client_secret)
         }

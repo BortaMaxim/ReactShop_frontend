@@ -22,6 +22,7 @@ import {adminProductsManagementDeleteReducer} from "./adminProducts/adminProduct
 import {checkoutReducer} from "./checkoutReducer";
 import {likesReducer} from "./likesReducer";
 import {commentsReducer} from "./commentsReducer";
+import {ISOCountriesReducer} from "./ISOCountriesReducer";
 
 export const rootReducer = combineReducers({
     form: formReducer,
@@ -47,4 +48,5 @@ export const rootReducer = combineReducers({
     checkout: checkoutReducer,
     likesDislikes: likesReducer,
     comments: commentsReducer,
+    ISOCountries: ISOCountriesReducer
 })

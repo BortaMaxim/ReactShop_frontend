@@ -6,16 +6,18 @@ import {CheckoutForm} from "./CheckoutForm";
 import {useForm} from "../../hooks/useForm";
 import {useDispatch, useSelector} from "react-redux";
 import {BillingAddressAction, ConfirmPaymentAction} from "../../redux/actions/CheckoutAction";
-import {billingDetails, shipping} from "./utils";
+import {billingDetails} from "./utils";
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import {checkoutPropsValidation} from "../../propTypes/checkoutPropTypes/checkoutPropsValidation";
 import {profilePropsValidation} from "../../propTypes/profileProps/profilePropsValidation";
+import {GetISOCountries} from "../../redux/actions/ISOCountriesAction";
 
 const Checkout = () => {
     const checkoutSelector = checkoutPropsValidation(useSelector(state => ({
         isChecking: state.checkout.isChecking,
         checkoutSuccess: state.checkout.checkoutSuccess,
         checkoutError: state.checkout.checkoutError,
+        ISOCountries: state.ISOCountries.ISOCountries
     })))
 
     const token = localStorage.getItem('user-token')
@@ -34,11 +36,15 @@ const Checkout = () => {
         currency: 'usd',
         description: '',
         city: '',
-        country: '',
+        country: 'US',
         line1: '',
         state: '',
         phone: ''
     })
+
+    useEffect(() => {
+        dispatch(GetISOCountries())
+    }, [dispatch])
 
     useEffect(() => {
         const formData = billingDetails(totalCart, fields)
